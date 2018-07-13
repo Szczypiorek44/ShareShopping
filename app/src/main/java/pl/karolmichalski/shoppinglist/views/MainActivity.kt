@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), MainListener {
 			viewModel = this@MainActivity.viewModel
 			listener = this@MainActivity
 		}
-		viewModel.getProducts().observeOnce(this, Observer {
+		viewModel.getProducts().observeOnce(Observer {
 			adapter.setProductList(it)
 		})
 	}
