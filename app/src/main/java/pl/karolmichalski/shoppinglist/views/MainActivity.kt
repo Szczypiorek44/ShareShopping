@@ -10,9 +10,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.adapters.ProductAdapter
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
-import pl.karolmichalski.shoppinglist.models.Product
 import pl.karolmichalski.shoppinglist.viewlisteners.MainListener
 import pl.karolmichalski.shoppinglist.viewmodels.MainViewModel
+import pl.karolmichalski.shoppinglist.viewmodels.observeOnce
 
 class MainActivity : AppCompatActivity(), MainListener {
 
@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity(), MainListener {
 			viewModel = this@MainActivity.viewModel
 			listener = this@MainActivity
 		}
-		viewModel.getAllProducts().observe(this, productsObserver)
+		viewModel.getProducts().observeOnce(this, Observer {
+			adapter.setProductList(it)
+		})
 	}
 
 	override fun onAddBtnClick() {
@@ -42,9 +44,4 @@ class MainActivity : AppCompatActivity(), MainListener {
 		viewModel.clearNewProductName()
 		adapter.addProduct(product)
 	}
-
-	private val productsObserver = Observer<List<Product>> {
-		it?.let { adapter.setProductList(it) }
-	}
-
 }

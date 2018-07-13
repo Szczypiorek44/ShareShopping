@@ -14,10 +14,12 @@ class ProductAdapter(context: Context) : RecyclerView.Adapter<ProductViewHolder>
 	private val productList: ArrayList<Product> = ArrayList()
 	private val layoutInflater = LayoutInflater.from(context)
 
-	fun setProductList(productList: List<Product>) {
-		this.productList.clear()
-		this.productList.addAll(productList)
-		notifyDataSetChanged()
+	fun setProductList(products: List<Product>?) {
+		products?.let {
+			productList.clear()
+			productList.addAll(it)
+			notifyDataSetChanged()
+		}
 	}
 
 	fun addProduct(product: Product) {

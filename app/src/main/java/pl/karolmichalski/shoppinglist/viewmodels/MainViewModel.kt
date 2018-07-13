@@ -1,9 +1,7 @@
 package pl.karolmichalski.shoppinglist.viewmodels
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.*
 import pl.karolmichalski.shoppinglist.ProductRepository
 import pl.karolmichalski.shoppinglist.models.Product
 
@@ -23,7 +21,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 		newProductName.value = ""
 	}
 
-	fun getAllProducts(): LiveData<List<Product>> {
+	fun getProducts(): LiveData<List<Product>> {
 		return repository.getAll()
 	}
+}
+
+fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+	observeForever(object : Observer<T> {
+		override fun onChanged(t: T?) {
+			observer.onChanged(t)
+			removeObserver(this)
+		}
+	})
 }
