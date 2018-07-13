@@ -9,9 +9,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.adapters.ProductAdapter
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
+import pl.karolmichalski.shoppinglist.utils.observeOnce
 import pl.karolmichalski.shoppinglist.viewlisteners.MainListener
 import pl.karolmichalski.shoppinglist.viewmodels.MainViewModel
-import pl.karolmichalski.shoppinglist.viewmodels.observeOnce
 
 class MainActivity : AppCompatActivity(), MainListener {
 
