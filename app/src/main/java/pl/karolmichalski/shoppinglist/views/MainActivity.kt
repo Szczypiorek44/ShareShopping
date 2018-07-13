@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.adapters.ProductAdapter
@@ -17,7 +16,6 @@ import pl.karolmichalski.shoppinglist.viewmodels.observeOnce
 class MainActivity : AppCompatActivity(), MainListener {
 
 	private val adapter by lazy {
-		recyclerView.layoutManager = LinearLayoutManager(this)
 		ProductAdapter(this).apply {
 			recyclerView.adapter = this
 		}

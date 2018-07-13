@@ -2,7 +2,6 @@ package pl.karolmichalski.shoppinglist
 
 import android.app.Application
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Transformations
 import android.os.AsyncTask
 import pl.karolmichalski.shoppinglist.models.Product
 
@@ -11,8 +10,7 @@ class ProductRepository(application: Application) {
 	private val dao = ShoppingDataBase.getInstance(application).productsDao()
 
 	fun getAll(): LiveData<List<Product>> {
-		return Transformations.map(dao.getAll()) { it.reversed() }
-//		return dao.getAll()
+		return dao.getAll()
 	}
 
 	fun insert(product: Product) {
