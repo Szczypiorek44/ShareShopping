@@ -4,7 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import pl.karolmichalski.shoppinglist.ProductRepository
+import pl.karolmichalski.shoppinglist.data.ProductRepository
 import pl.karolmichalski.shoppinglist.models.Product
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {

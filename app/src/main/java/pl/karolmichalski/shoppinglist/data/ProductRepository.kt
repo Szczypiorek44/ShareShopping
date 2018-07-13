@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist
+package pl.karolmichalski.shoppinglist.data
 
 import android.app.Application
 import android.arch.lifecycle.LiveData
