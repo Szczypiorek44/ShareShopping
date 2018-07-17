@@ -6,6 +6,7 @@ import android.view.View
 import com.androidhuman.rxfirebase2.auth.rxCreateUserWithEmailAndPassword
 import com.androidhuman.rxfirebase2.auth.rxSignInWithEmailAndPassword
 import com.google.firebase.auth.FirebaseAuth
+import io.reactivex.rxkotlin.subscribeBy
 
 class LoginViewModel : ViewModel() {
 
@@ -22,24 +23,21 @@ class LoginViewModel : ViewModel() {
 		firebaseAuth.rxSignInWithEmailAndPassword(email.value!!, password.value!!)
 				.doOnSubscribe { loadingVisibility.value = View.VISIBLE }
 				.doFinally { loadingVisibility.value = View.GONE }
-				.subscribe({
-					loginSuccess.value = true
-				}) {
-					errorMessage.value = it.localizedMessage
-				}
+				.subscribeBy(
+						onSuccess = { loginSuccess.value = true },
+						onError = { errorMessage.value = it.localizedMessage }
+				)
 	}
 
 	fun createUserWithEmailAndPassword() {
 		firebaseAuth.rxCreateUserWithEmailAndPassword(email.value!!, password.value!!)
 				.doOnSubscribe { loadingVisibility.value = View.VISIBLE }
 				.doFinally { loadingVisibility.value = View.GONE }
-				.subscribe({
-					loginSuccess.value = true
-				}) {
-					errorMessage.value = it.localizedMessage
-				}
+				.subscribeBy(
+						onSuccess = { loginSuccess.value = true },
+						onError = { errorMessage.value = it.localizedMessage }
+				)
 	}
-
 
 
 }
