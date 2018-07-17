@@ -4,6 +4,10 @@
     <data>
 
         <variable
+            name="listener"
+            type="pl.karolmichalski.shoppinglist.viewlisteners.LoginListener" />
+
+        <variable
             name="viewModel"
             type="pl.karolmichalski.shoppinglist.viewmodels.LoginViewModel" />
 
@@ -11,7 +15,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="login"
+            android:text="@={viewModel.login}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="password"
+            android:text="@={viewModel.password}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:onClick="@{()->listener.onLoginBtnClick()}"
+            android:text="login" />
 
     </LinearLayout>
 
