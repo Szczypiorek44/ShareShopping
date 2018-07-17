@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -13,37 +14,54 @@
 
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:focusableInTouchMode="true">
 
         <EditText
+            android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="email"
             android:text="@={viewModel.email}" />
 
         <EditText
+            android:id="@+id/passwordEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"
             android:inputType="textPassword"
-            android:text="@={viewModel.password}" />
+            android:text="@={viewModel.password}"
+            app:layout_constraintTop_toBottomOf="@id/emailEt" />
 
         <Button
+            android:id="@+id/loginBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{()->listener.onLoginBtnClick()}"
-            android:text="login" />
+            android:text="login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passwordEt" />
 
         <Button
+            android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{()->listener.onRegisterBtnClick()}"
-            android:text="register" />
+            android:text="register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginBtn" />
 
-    </LinearLayout>
+        <pl.karolmichalski.shoppinglist.customviews.LoadingLayout
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.loadingVisibility}" />
+
+    </android.support.constraint.ConstraintLayout>
 
 </layout>

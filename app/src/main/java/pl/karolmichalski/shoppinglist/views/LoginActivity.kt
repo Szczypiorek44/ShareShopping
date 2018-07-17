@@ -1,5 +1,7 @@
 package pl.karolmichalski.shoppinglist.views
 
+import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -7,14 +9,16 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.databinding.ActivityLoginBinding
-import pl.karolmichalski.shoppinglist.viewlisteners.LoginCallback
 import pl.karolmichalski.shoppinglist.viewlisteners.LoginListener
 import pl.karolmichalski.shoppinglist.viewmodels.LoginViewModel
 
 class LoginActivity : AppCompatActivity(), LoginListener {
 
 	private val viewModel by lazy {
-		ViewModelProviders.of(this).get(LoginViewModel::class.java)
+		ViewModelProviders.of(this).get(LoginViewModel::class.java).apply {
+			loginSuccess.observe(this@LoginActivity, onLoginSuccess)
+			errorMessage.observe(this@LoginActivity, showError)
+		}
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,23 +31,20 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 	}
 
 	override fun onLoginBtnClick() {
-		viewModel.signInWithEmailAndPassword(loginCallback)
+		viewModel.signInWithEmailAndPassword()
 	}
 
 
 	override fun onRegisterBtnClick() {
-		viewModel.createUserWithEmailAndPassword(loginCallback)
+		viewModel.createUserWithEmailAndPassword()
 	}
 
-	private val loginCallback = object : LoginCallback {
-		override fun onSuccess() {
-			setResult(RESULT_OK)
-			finish()
-		}
+	private val onLoginSuccess = Observer<Boolean> {
+		setResult(Activity.RESULT_OK)
+		finish()
+	}
 
-		override fun onError(message: String) {
-			Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
-		}
-
+	private val showError = Observer<String> {
+		Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 	}
 }
