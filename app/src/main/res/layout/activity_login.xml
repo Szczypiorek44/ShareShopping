@@ -22,21 +22,27 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="login"
-            android:text="@={viewModel.login}" />
+            android:hint="email"
+            android:text="@={viewModel.email}" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="password"
+            android:inputType="textPassword"
             android:text="@={viewModel.password}" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
             android:onClick="@{()->listener.onLoginBtnClick()}"
             android:text="login" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->listener.onRegisterBtnClick()}"
+            android:text="register" />
 
     </LinearLayout>
 

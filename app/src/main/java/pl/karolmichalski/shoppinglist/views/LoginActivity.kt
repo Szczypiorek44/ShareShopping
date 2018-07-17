@@ -7,11 +7,11 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.databinding.ActivityLoginBinding
+import pl.karolmichalski.shoppinglist.viewlisteners.LoginCallback
 import pl.karolmichalski.shoppinglist.viewlisteners.LoginListener
 import pl.karolmichalski.shoppinglist.viewmodels.LoginViewModel
 
 class LoginActivity : AppCompatActivity(), LoginListener {
-
 
 	private val viewModel by lazy {
 		ViewModelProviders.of(this).get(LoginViewModel::class.java)
@@ -24,10 +24,26 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 			listener = this@LoginActivity
 			viewModel = this@LoginActivity.viewModel
 		}
-
 	}
 
 	override fun onLoginBtnClick() {
-		Toast.makeText(this, viewModel.login.value + " " + viewModel.password.value, Toast.LENGTH_SHORT).show()
+		viewModel.signInWithEmailAndPassword(loginCallback)
+	}
+
+
+	override fun onRegisterBtnClick() {
+		viewModel.createUserWithEmailAndPassword(loginCallback)
+	}
+
+	private val loginCallback = object : LoginCallback {
+		override fun onSuccess() {
+			setResult(RESULT_OK)
+			finish()
+		}
+
+		override fun onError(message: String) {
+			Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
+		}
+
 	}
 }
