@@ -5,9 +5,9 @@ import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
 import pl.karolmichalski.shoppinglist.models.Product
 
-class ProductRepository(application: Application) {
+class ProductsRepository(application: Application) {
 
-	private val dao = ShoppingDataBase.getInstance(application).productsDao()
+	private val dao = LocalDataBase.getInstance(application).productsDao()
 
 	fun getAll(): LiveData<List<Product>> {
 		return dao.getAll()

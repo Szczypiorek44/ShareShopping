@@ -6,8 +6,9 @@ buildscript {
     ext.lifecycle_version = "1.1.1"
     ext.room_version = "1.1.1"
     ext.rxkotlin_version = "2.2.0"
-    ext.firebase_auth_version = "16.0.2"
     ext.firebase_core_version = "16.0.1"
+    ext.firebase_auth_version = "16.0.2"
+    ext.firebase_database_version = "16.0.1"
 
     repositories {
         google()

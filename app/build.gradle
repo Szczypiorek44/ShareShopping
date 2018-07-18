@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 27
@@ -43,17 +42,22 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 
+    // required dependency: firebase-core
+    implementation "com.androidhuman.rxfirebase2:firebase-core:$firebase_core_version.0"
+    implementation "com.google.firebase:firebase-core:$firebase_core_version"
+
     // firebase-auth
     implementation "com.androidhuman.rxfirebase2:firebase-auth-kotlin:$firebase_auth_version.0"
     implementation "com.androidhuman.rxfirebase2:firebase-auth:$firebase_auth_version.0"
     implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
 
-    // required dependency: firebase-core
-    implementation "com.androidhuman.rxfirebase2:firebase-core:$firebase_core_version.0"
-    implementation "com.google.firebase:firebase-core:$firebase_core_version"
+    // firebase-database
+    implementation 'com.androidhuman.rxfirebase2:firebase-database-kotlin:16.0.1.2'
+    implementation 'com.androidhuman.rxfirebase2:firebase-database:16.0.1.0'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
-
+apply plugin: 'com.google.gms.google-services'

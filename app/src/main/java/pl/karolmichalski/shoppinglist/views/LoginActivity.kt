@@ -12,6 +12,7 @@ import pl.karolmichalski.shoppinglist.databinding.ActivityLoginBinding
 import pl.karolmichalski.shoppinglist.viewlisteners.LoginListener
 import pl.karolmichalski.shoppinglist.viewmodels.LoginViewModel
 
+
 class LoginActivity : AppCompatActivity(), LoginListener {
 
 	private val viewModel by lazy {
