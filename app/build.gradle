@@ -48,6 +48,8 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
     // required dependency: firebase-core
     implementation "com.androidhuman.rxfirebase2:firebase-core:$firebase_core_version.0"
     implementation "com.google.firebase:firebase-core:$firebase_core_version"

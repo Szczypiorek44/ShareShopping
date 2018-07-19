@@ -2,8 +2,15 @@ package pl.karolmichalski.shoppinglist.data
 
 import android.app.Application
 import android.arch.lifecycle.LiveData
-import android.os.AsyncTask
+import android.util.Log
+import com.androidhuman.rxfirebase2.database.rxRemoveValue
+import com.androidhuman.rxfirebase2.database.rxSetValue
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import pl.karolmichalski.shoppinglist.models.Product
 
 class ProductsRepository(application: Application) {
@@ -11,31 +18,51 @@ class ProductsRepository(application: Application) {
 	private val localDatabase = LocalDatabase.getInstance(application).productsDao()
 	private val cloudDatabase = FirebaseDatabase.getInstance().reference
 
+	private val user = FirebaseAuth.getInstance().currentUser
+
 	fun getAll(): LiveData<List<Product>> {
 		return localDatabase.getAll()
 	}
 
 	fun insert(product: Product) {
-		InsertAsyncTask(localDatabase).execute(product)
+		Completable.fromAction { localDatabase.insert(product) }
+				.andThen(cloudDatabase.child("users").child(user!!.uid).child("products").push().rxSetValue(product.name))
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribeBy(
+						onComplete = {
+							Log.d("awda", "awdaw")
+						},
+						onError = {
+							Log.d("awda", "awdaw")
+						}
+				)
+
 	}
 
-	fun delete(product: Product){
-		DeleteAsyncTask(localDatabase).execute(product)
+	fun delete(product: Product) {
+		Completable.fromAction { localDatabase.delete(product) }
+				.andThen(cloudDatabase.child("users").child(user!!.uid).child("products").child(product.name).rxRemoveValue())
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribeBy(
+						onComplete = {
+							Log.d("awda", "awdaw")
+						},
+						onError = {
+							Log.d("awda", "awdaw")
+						}
+				)
 	}
 
-	private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: LocalDatabaseDAO) : AsyncTask<Product, Void, Void>() {
+//	fun merge(clientSingle: Single<ClientResponse>, statusesSingle: Single<List<LabelValue>>): Single<RequestMerger> {
+//		return Single.zip(clientSingle, statusesSingle, BiFunction { client, statuses ->
+//			client.client.applicationList?.let {
+//				for (application in it)
+//					application.setStatuses(statuses)
+//			}
+//			RequestMerger(client.client)
+//		})
+//	}
 
-		override fun doInBackground(vararg params: Product): Void? {
-			mAsyncTaskDao.insert(params[0])
-			return null
-		}
-	}
-
-	private class DeleteAsyncTask internal constructor(private val mAsyncTaskDao: LocalDatabaseDAO) : AsyncTask<Product, Void, Void>() {
-
-		override fun doInBackground(vararg params: Product): Void? {
-			mAsyncTaskDao.delete(params[0])
-			return null
-		}
-	}
 }
