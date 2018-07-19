@@ -7,18 +7,18 @@ import android.content.Context
 import pl.karolmichalski.shoppinglist.models.Product
 
 @Database(entities = [(Product::class)], version = 1)
-abstract class LocalDataBase : RoomDatabase() {
+abstract class LocalDatabase : RoomDatabase() {
 
-	abstract fun productsDao(): ProductsDAO
+	abstract fun productsDao(): LocalDatabaseDAO
 
 	companion object {
 
-		private var INSTANCE: LocalDataBase? = null
+		private var INSTANCE: LocalDatabase? = null
 
-		fun getInstance(context: Context): LocalDataBase {
+		fun getInstance(context: Context): LocalDatabase {
 			if (INSTANCE == null) {
-				synchronized(LocalDataBase::class) {
-					INSTANCE = Room.databaseBuilder(context.applicationContext, LocalDataBase::class.java, "shopping.db").build()
+				synchronized(LocalDatabase::class) {
+					INSTANCE = Room.databaseBuilder(context.applicationContext, LocalDatabase::class.java, "shopping.db").build()
 				}
 			}
 			return INSTANCE!!

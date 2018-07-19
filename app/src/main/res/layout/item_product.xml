@@ -12,10 +12,6 @@
             name="listener"
             type="android.view.View.OnClickListener" />
 
-        <variable
-            name="clickCallback"
-            type="pl.karolmichalski.shoppinglist.viewlisteners.ProductListener" />
-
     </data>
 
     <CheckedTextView

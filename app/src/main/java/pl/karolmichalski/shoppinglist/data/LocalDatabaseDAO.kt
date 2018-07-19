@@ -9,7 +9,7 @@ import android.arch.persistence.room.Query
 import pl.karolmichalski.shoppinglist.models.Product
 
 @Dao
-interface ProductsDAO {
+interface LocalDatabaseDAO {
 
 	@Query("Select * from products")
 	fun getAll(): LiveData<List<Product>>
