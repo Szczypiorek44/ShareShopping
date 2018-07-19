@@ -33,6 +33,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:onItemClick="@{listener}"
+            app:productList="@{viewModel.productList}"
             app:reverseLayout="true"
             app:stackFromEnd="true" />
 
@@ -46,7 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@={viewModel.newProductName}" />
+                android:text="@={viewModel.productName}" />
 
             <Button
                 android:layout_width="wrap_content"

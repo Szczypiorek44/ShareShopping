@@ -17,10 +17,22 @@ class ProductsRepository(application: Application) {
 		InsertAsyncTask(dao).execute(product)
 	}
 
+	fun delete(product: Product){
+		DeleteAsyncTask(dao).execute(product)
+	}
+
 	private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: ProductsDAO) : AsyncTask<Product, Void, Void>() {
 
 		override fun doInBackground(vararg params: Product): Void? {
 			mAsyncTaskDao.insert(params[0])
+			return null
+		}
+	}
+
+	private class DeleteAsyncTask internal constructor(private val mAsyncTaskDao: ProductsDAO) : AsyncTask<Product, Void, Void>() {
+
+		override fun doInBackground(vararg params: Product): Void? {
+			mAsyncTaskDao.delete(params[0])
 			return null
 		}
 	}

@@ -2,43 +2,39 @@ package pl.karolmichalski.shoppinglist.viewmodels
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Observer
 import com.google.firebase.database.FirebaseDatabase
 import pl.karolmichalski.shoppinglist.data.ProductsRepository
 import pl.karolmichalski.shoppinglist.models.Product
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-	val newProductName = MutableLiveData<String>()
+	val productName = MutableLiveData<String>()
 
-	private val repository = ProductsRepository(application)
+	val productList = MutableLiveData<List<Product>>().apply { value = ArrayList() }
+
+	private val localDatabase = ProductsRepository(application)
 	private val cloudDatabase = FirebaseDatabase.getInstance().reference
 
-	fun getCreatedProduct(): Product {
-		val product = Product(newProductName.value!!)
-		repository.insert(product)
-
-		return product
+	fun getProducts(owner: LifecycleOwner) {
+		localDatabase.getAll().observe(owner, Observer {
+			productList.value = it
+		})
 	}
 
-	fun clearNewProductName() {
-		newProductName.value = ""
+	fun addProduct() {
+		productName.value?.let { name ->
+			localDatabase.insert( Product(name))
+		}
 	}
 
-	fun getProducts(): LiveData<List<Product>> {
-		return repository.getAll()
+	fun removeProduct(product: Product) {
+		localDatabase.delete(product)
 	}
 
-//	private fun addProduct(){
-//		cloudDatabase.child("users").child(FirebaseAuth.getInstance().currentUser!!.uid).child("products").push().rxSetValue(product.name)
-//				.subscribeBy(
-//						onComplete = {
-//
-//						},
-//						onError = {
-//
-//						}
-//				)
-//	}
+	fun clearProductName() {
+		productName.value = ""
+	}
 }

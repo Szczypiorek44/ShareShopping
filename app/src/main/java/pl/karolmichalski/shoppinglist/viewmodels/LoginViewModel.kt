@@ -2,7 +2,6 @@ package pl.karolmichalski.shoppinglist.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.view.View
 import com.androidhuman.rxfirebase2.auth.rxCreateUserWithEmailAndPassword
 import com.androidhuman.rxfirebase2.auth.rxSignInWithEmailAndPassword
 import com.google.firebase.auth.FirebaseAuth
@@ -13,7 +12,7 @@ class LoginViewModel : ViewModel() {
 	val email = MutableLiveData<String>()
 	val password = MutableLiveData<String>()
 
-	val loadingVisibility = MutableLiveData<Int>().apply { value = View.GONE }
+	val isLoading = MutableLiveData<Boolean>()
 	val loginSuccess = MutableLiveData<Boolean>()
 	val errorMessage = MutableLiveData<String>()
 
@@ -21,8 +20,8 @@ class LoginViewModel : ViewModel() {
 
 	fun signInWithEmailAndPassword() {
 		firebaseAuth.rxSignInWithEmailAndPassword(email.value!!, password.value!!)
-				.doOnSubscribe { loadingVisibility.value = View.VISIBLE }
-				.doFinally { loadingVisibility.value = View.GONE }
+				.doOnSubscribe { isLoading.value = true }
+				.doFinally { isLoading.value = false }
 				.subscribeBy(
 						onSuccess = { loginSuccess.value = true },
 						onError = { errorMessage.value = it.localizedMessage }
@@ -31,8 +30,8 @@ class LoginViewModel : ViewModel() {
 
 	fun createUserWithEmailAndPassword() {
 		firebaseAuth.rxCreateUserWithEmailAndPassword(email.value!!, password.value!!)
-				.doOnSubscribe { loadingVisibility.value = View.VISIBLE }
-				.doFinally { loadingVisibility.value = View.GONE }
+				.doOnSubscribe { isLoading.value = true }
+				.doFinally { isLoading.value = false }
 				.subscribeBy(
 						onSuccess = { loginSuccess.value = true },
 						onError = { errorMessage.value = it.localizedMessage }

@@ -1,18 +1,25 @@
 package pl.karolmichalski.shoppinglist.viewholders
 
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import pl.karolmichalski.shoppinglist.adapters.ProductAdapter
 import pl.karolmichalski.shoppinglist.databinding.ItemProductBinding
 import pl.karolmichalski.shoppinglist.models.Product
-import pl.karolmichalski.shoppinglist.viewlisteners.ProductListener
 
-class ProductViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root), ProductListener {
+class ProductViewHolder(private val binding: ItemProductBinding,
+						private val productClickCallback: ProductAdapter.ProductClickCallback)
+	: RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
 
 	init {
 		binding.listener = this
 	}
 
-	override fun onProductClick() {
-		binding.product?.apply { checked = !checked }
+	override fun onClick(v: View?) {
+		binding.product?.apply {
+			checked = !checked
+			productClickCallback.onProductClick(this)
+		}
 		binding.invalidateAll()
 	}
 

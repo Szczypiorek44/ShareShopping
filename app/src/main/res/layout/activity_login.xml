@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
 
         <variable
             name="listener"
@@ -55,12 +56,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginBtn" />
 
+
         <pl.karolmichalski.shoppinglist.customviews.LoadingLayout
             android:layout_width="match_parent"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_height="match_parent"
-            android:visibility="@{viewModel.loadingVisibility}" />
+            android:visibility="@{viewModel.isLoading ? View.INVISIBLE : View.VISIBLE}" />
 
     </android.support.constraint.ConstraintLayout>
 

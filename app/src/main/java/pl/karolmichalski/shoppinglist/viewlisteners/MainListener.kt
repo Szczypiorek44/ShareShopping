@@ -1,5 +1,7 @@
 package pl.karolmichalski.shoppinglist.viewlisteners
 
-interface MainListener {
+import pl.karolmichalski.shoppinglist.adapters.ProductAdapter
+
+interface MainListener: ProductAdapter.ProductClickCallback {
 	fun onAddBtnClick()
 }
