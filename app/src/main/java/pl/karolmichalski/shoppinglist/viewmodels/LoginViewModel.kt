@@ -12,7 +12,7 @@ class LoginViewModel : ViewModel() {
 	val email = MutableLiveData<String>()
 	val password = MutableLiveData<String>()
 
-	val isLoading = MutableLiveData<Boolean>()
+	val isLoading = MutableLiveData<Boolean>().apply { value = false }
 	val loginSuccess = MutableLiveData<Boolean>()
 	val errorMessage = MutableLiveData<String>()
 

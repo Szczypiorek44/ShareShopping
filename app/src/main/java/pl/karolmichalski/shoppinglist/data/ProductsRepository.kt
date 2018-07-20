@@ -24,9 +24,12 @@ class ProductsRepository(application: Application) {
 		return localDatabase.getAll()
 	}
 
-	fun insert(product: Product) {
+	fun insert(name: String) {
+		val cloudProducts = cloudDatabase.child("users").child(user!!.uid).child("products").push()
+		val key = cloudProducts.key!!
+		val product = Product(key, name)
 		Completable.fromAction { localDatabase.insert(product) }
-				.andThen(cloudDatabase.child("users").child(user!!.uid).child("products").push().rxSetValue(product.name))
+				.andThen(cloudProducts.rxSetValue(product.name))
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeBy(
@@ -37,12 +40,11 @@ class ProductsRepository(application: Application) {
 							Log.d("awda", "awdaw")
 						}
 				)
-
 	}
 
 	fun delete(product: Product) {
 		Completable.fromAction { localDatabase.delete(product) }
-				.andThen(cloudDatabase.child("users").child(user!!.uid).child("products").child(product.name).rxRemoveValue())
+				.andThen(cloudDatabase.child("users").child(user!!.uid).child("products").child(product.key).rxRemoveValue())
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeBy(

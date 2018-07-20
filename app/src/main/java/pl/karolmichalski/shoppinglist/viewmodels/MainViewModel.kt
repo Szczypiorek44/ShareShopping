@@ -23,8 +23,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 	}
 
 	fun addProduct() {
-		productName.value?.let { name ->
-			productsRepository.insert( Product(name))
+		productName.value?.let {
+			productsRepository.insert(it)
 		}
 	}
 

@@ -6,11 +6,9 @@ import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "products")
-data class Product(@PrimaryKey
-				   @ColumnInfo(name = "name")
-				   var name: String,
-				   @Ignore
-				   var checked: Boolean = false){
+class Product(@PrimaryKey
+			  @ColumnInfo(name = "key") val key: String,
+			  @ColumnInfo(name = "name") val name: String) {
+	@Ignore var checked: Boolean = false
 
-	constructor():this("")
 }
