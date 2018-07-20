@@ -12,7 +12,7 @@ import pl.karolmichalski.shoppinglist.models.Product
 class ProductsRepository(application: Application) {
 
 	private val localDatabase = LocalDatabase.getInstance(application).productsDao()
-	private val cloudDatabase = CloudDatabase.getInstance().getDAO()
+	private val cloudDatabase = CloudDatabase.getInstance().getDao()
 
 	fun getAll(): LiveData<List<Product>> {
 		return localDatabase.getAll()

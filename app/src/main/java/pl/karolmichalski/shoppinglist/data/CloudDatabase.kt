@@ -15,7 +15,7 @@ class CloudDatabase private constructor() : CloudDatabaseDAO {
 
 	private lateinit var keyDir: DatabaseReference
 
-	fun getDAO(): CloudDatabaseDAO {
+	fun getDao(): CloudDatabaseDAO {
 		return this
 	}
 
