@@ -24,15 +24,11 @@ class ProductsRepository(application: Application) {
 			Completable.fromAction { localDatabase.insert(product) }
 					.andThen(cloudDatabase.insert(product))
 					.subscribeOn(Schedulers.io())
-					.observeOn(AndroidSchedulers.mainThread())
-					.subscribeBy(
-							onComplete = {
-								Log.d("awda", "awdaw")
-							},
-							onError = {
-								Log.d("awda", "awdaw")
-							}
-					)
+					.observeOn(Schedulers.io())
+					.subscribeBy(onComplete = {
+						product.isUploaded = true
+						localDatabase.update(product)
+					})
 		}
 
 	}

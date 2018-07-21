@@ -9,6 +9,9 @@ import android.arch.persistence.room.PrimaryKey
 class Product(@PrimaryKey
 			  @ColumnInfo(name = "key") val key: String,
 			  @ColumnInfo(name = "name") val name: String) {
-	@Ignore var checked: Boolean = false
+	@ColumnInfo(name = "is_uploaded")
+	var isUploaded: Boolean = false
+	@Ignore
+	var checked: Boolean = false
 
 }

@@ -1,8 +1,8 @@
 package pl.karolmichalski.shoppinglist.views
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 	}
 
 	private val onLoginSuccess = Observer<Boolean> {
-		setResult(Activity.RESULT_OK)
+		startActivity(Intent(this, MainActivity::class.java))
 		finish()
 	}
 
