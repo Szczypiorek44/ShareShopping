@@ -13,17 +13,28 @@ import pl.karolmichalski.shoppinglist.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity(), MainListener {
 
-	private val viewModel by lazy {
-		ViewModelProviders.of(this).get(MainViewModel::class.java)
-	}
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(MainViewModel::class.java)
+    }
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		if (viewModel.isUserNotLogged()) {
-			startActivity(Intent(this, LoginActivity::class.java))
-			finish()
-			return
-		}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (viewModel.isUserLogged())
+            init()
+        else
+            startLoginActivity()
+    }
+
+    override fun onAddBtnClick() {
+        viewModel.addProduct()
+        viewModel.clearProductName()
+    }
+
+    override fun onProductClick(product: Product) {
+        viewModel.removeProduct(product)
+    }
+
+	private fun init() {
 		DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
 			setLifecycleOwner(this@MainActivity)
 			viewModel = this@MainActivity.viewModel
@@ -32,12 +43,9 @@ class MainActivity : AppCompatActivity(), MainListener {
 		viewModel.getProducts(this)
 	}
 
-	override fun onAddBtnClick() {
-		viewModel.addProduct()
-		viewModel.clearProductName()
+	private fun startLoginActivity() {
+		startActivity(Intent(this, LoginActivity::class.java))
+		finish()
 	}
 
-	override fun onProductClick(product: Product) {
-		viewModel.removeProduct(product)
-	}
 }

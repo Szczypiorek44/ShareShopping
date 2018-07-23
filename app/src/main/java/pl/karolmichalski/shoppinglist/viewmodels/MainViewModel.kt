@@ -37,7 +37,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 		productName.value = ""
 	}
 
-	fun isUserNotLogged(): Boolean {
-		return FirebaseAuth.getInstance().currentUser == null
+	fun isUserLogged(): Boolean {
+		return FirebaseAuth.getInstance().currentUser != null
 	}
 }
