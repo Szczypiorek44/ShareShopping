@@ -20,13 +20,13 @@ class ProductsRepository(application: Application) {
 
 	fun insert(name: String) {
 		cloudDatabase.generateKey()?.let { key ->
-			val product = Product(key, name)
+			val product = Product(key, name, Product.Status.ADDED)
 			Completable.fromAction { localDatabase.insert(product) }
 					.andThen(cloudDatabase.insert(product))
 					.subscribeOn(Schedulers.io())
 					.observeOn(Schedulers.io())
 					.subscribeBy(onComplete = {
-						product.isUploaded = true
+						product.status = Product.Status.SYNCED
 						localDatabase.update(product)
 					})
 		}
