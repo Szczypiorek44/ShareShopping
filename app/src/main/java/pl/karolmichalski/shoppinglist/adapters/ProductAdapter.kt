@@ -1,6 +1,5 @@
 package pl.karolmichalski.shoppinglist.adapters
 
-import android.content.Context
 import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
 import android.support.v7.recyclerview.extensions.ListAdapter
@@ -15,15 +14,12 @@ import pl.karolmichalski.shoppinglist.viewholders.ProductViewHolder
 @BindingAdapter("productList", "onItemClick")
 fun RecyclerView.setProducts(productList: List<Product>, productClickCallback: ProductAdapter.ProductClickCallback) {
 	if (adapter == null)
-		adapter = ProductAdapter(context, productClickCallback)
+		adapter = ProductAdapter(productClickCallback)
 	(adapter as ProductAdapter).submitList(productList)
 }
 
-class ProductAdapter(context: Context,
-					 private val productClickCallback: ProductClickCallback)
+class ProductAdapter(private val productClickCallback: ProductClickCallback)
 	: ListAdapter<Product, ProductViewHolder>(ProductDiff()) {
-
-	private val layoutInflater = LayoutInflater.from(context)
 
 	class ProductDiff : DiffUtil.ItemCallback<Product>() {
 		override fun areItemsTheSame(oldItem: Product?, newItem: Product?): Boolean {
@@ -36,7 +32,7 @@ class ProductAdapter(context: Context,
 	}
 
 	override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ProductViewHolder {
-		return ProductViewHolder(DataBindingUtil.inflate(layoutInflater, R.layout.item_product, viewGroup, false), productClickCallback)
+		return ProductViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), R.layout.item_product, viewGroup, false), productClickCallback)
 	}
 
 	override fun onBindViewHolder(viewHolder: ProductViewHolder, i: Int) {
