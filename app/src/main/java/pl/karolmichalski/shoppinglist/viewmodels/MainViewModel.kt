@@ -29,8 +29,27 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 		}
 	}
 
-	fun removeProduct(product: Product) {
-		productsRepository.delete(product)
+	fun removeCheckedProducts() {
+		productList.value?.forEach { product ->
+			if (product.checked)
+				productsRepository.delete(product)
+		}
+	}
+
+	fun getCheckedProductsCount(): Int {
+		var count = 0
+		productList.value?.forEach { product ->
+			if (product.checked)
+				count++
+		}
+		return count
+	}
+
+	fun deselectAllProducts() {
+		productList.value?.forEach { product ->
+			if (product.checked)
+				product.checked = false
+		}
 	}
 
 	fun clearProductName() {
@@ -40,4 +59,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 	fun isUserLogged(): Boolean {
 		return FirebaseAuth.getInstance().currentUser != null
 	}
+
 }

@@ -21,6 +21,10 @@ fun RecyclerView.setProducts(productList: List<Product>, productClickCallback: P
 class ProductAdapter(private val productClickCallback: ProductClickCallback)
 	: ListAdapter<Product, ProductViewHolder>(ProductDiff()) {
 
+	init {
+		setHasStableIds(true)
+	}
+
 	class ProductDiff : DiffUtil.ItemCallback<Product>() {
 		override fun areItemsTheSame(oldItem: Product?, newItem: Product?): Boolean {
 			return oldItem?.key == newItem?.key
@@ -37,6 +41,10 @@ class ProductAdapter(private val productClickCallback: ProductClickCallback)
 
 	override fun onBindViewHolder(viewHolder: ProductViewHolder, i: Int) {
 		viewHolder.bind(getItem(i))
+	}
+
+	override fun getItemId(position: Int): Long {
+		return position.toLong()
 	}
 
 	interface ProductClickCallback {

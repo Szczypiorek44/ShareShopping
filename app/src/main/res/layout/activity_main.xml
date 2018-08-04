@@ -21,12 +21,6 @@
         android:orientation="vertical"
         tools:context=".views.MainActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/indigo500"
-            app:title="@string/app_name" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
