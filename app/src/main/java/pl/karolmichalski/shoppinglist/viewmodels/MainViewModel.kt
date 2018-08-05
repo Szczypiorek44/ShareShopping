@@ -29,6 +29,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 		}
 	}
 
+	fun updateProduct(product: Product) {
+		productsRepository.update(product)
+	}
+
 	fun removeCheckedProducts() {
 		productList.value?.forEach { product ->
 			if (product.checked)
@@ -47,8 +51,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 	fun deselectAllProducts() {
 		productList.value?.forEach { product ->
-			if (product.checked)
+			if (product.checked) {
 				product.checked = false
+				updateProduct(product) //database needs to know that product is unchecked
+			}
 		}
 	}
 

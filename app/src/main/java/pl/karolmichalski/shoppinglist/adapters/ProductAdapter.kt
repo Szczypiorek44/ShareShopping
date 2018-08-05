@@ -27,7 +27,7 @@ class ProductAdapter(private val productClickCallback: ProductClickCallback)
 
 	class ProductDiff : DiffUtil.ItemCallback<Product>() {
 		override fun areItemsTheSame(oldItem: Product?, newItem: Product?): Boolean {
-			return oldItem?.key == newItem?.key
+			return oldItem == newItem
 		}
 
 		override fun areContentsTheSame(oldItem: Product?, newItem: Product?): Boolean {

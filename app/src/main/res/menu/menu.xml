@@ -5,6 +5,7 @@
         android:title=""/>
     <item
         android:id="@+id/delete"
-        android:title="elo" />
+        android:icon="@drawable/baseline_delete_white_24"
+        android:title="@string/delete"/>
 
 </menu>

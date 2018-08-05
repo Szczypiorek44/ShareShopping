@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), MainListener {
 	}
 
 	override fun onProductClick(product: Product) {
+		viewModel.updateProduct(product) //database needs to know that product is checked
 		actionModeManager.invalidate()
 	}
 

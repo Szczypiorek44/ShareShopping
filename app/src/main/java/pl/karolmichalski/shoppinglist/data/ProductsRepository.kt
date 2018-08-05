@@ -33,29 +33,21 @@ class ProductsRepository(application: Application) {
 
 	}
 
+	fun update(product: Product) {
+		Completable.fromAction { localDatabase.update(product) }
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribe()
+	}
+
 	fun delete(product: Product) {
 		Completable.fromAction { localDatabase.delete(product) }
 				.andThen(cloudDatabase.delete(product))
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeBy(
-						onComplete = {
-							Log.d("awda", "awdaw")
-						},
-						onError = {
-							Log.d("awda", "awdaw")
-						}
+						onComplete = { Log.d("awda", "awdaw") },
+						onError = { Log.d("awda", "awdaw") }
 				)
 	}
-
-//	fun merge(clientSingle: Single<ClientResponse>, statusesSingle: Single<List<LabelValue>>): Single<RequestMerger> {
-//		return Single.zip(clientSingle, statusesSingle, BiFunction { client, statuses ->
-//			client.client.applicationList?.let {
-//				for (application in it)
-//					application.setStatuses(statuses)
-//			}
-//			RequestMerger(client.client)
-//		})
-//	}
-
 }
