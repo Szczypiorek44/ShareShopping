@@ -2,12 +2,11 @@ package pl.karolmichalski.shoppinglist.viewholders
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import pl.karolmichalski.shoppinglist.adapters.ProductAdapter
 import pl.karolmichalski.shoppinglist.databinding.ItemProductBinding
 import pl.karolmichalski.shoppinglist.models.Product
 
 class ProductViewHolder(private val binding: ItemProductBinding,
-						private val productClickCallback: ProductAdapter.ProductClickCallback)
+						private val onProductClick: (Product) -> Unit)
 	: RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
 
@@ -18,7 +17,7 @@ class ProductViewHolder(private val binding: ItemProductBinding,
 	override fun onClick(v: View?) {
 		binding.product?.apply {
 			checked = !checked
-			productClickCallback.onProductClick(this)
+			onProductClick(this)
 		}
 		binding.invalidateAll()
 	}

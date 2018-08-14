@@ -1,7 +1,10 @@
 package pl.karolmichalski.shoppinglist.viewlisteners
 
-import pl.karolmichalski.shoppinglist.adapters.ProductAdapter
+import pl.karolmichalski.shoppinglist.models.Product
 
-interface MainListener: ProductAdapter.ProductClickCallback {
+
+interface MainListener {
 	fun onAddBtnClick()
+
+	fun onProductClick(): (Product) -> Unit
 }

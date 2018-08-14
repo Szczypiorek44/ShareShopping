@@ -36,9 +36,11 @@ class MainActivity : AppCompatActivity(), MainListener {
 		viewModel.clearProductName()
 	}
 
-	override fun onProductClick(product: Product) {
-		viewModel.updateProduct(product) //database needs to know that product is checked
-		actionModeManager.invalidate()
+	override fun onProductClick(): (Product) -> Unit {
+		return {
+			viewModel.updateProduct(it) //database needs to know that product is checked
+			actionModeManager.invalidate()
+		}
 	}
 
 	private fun init() {

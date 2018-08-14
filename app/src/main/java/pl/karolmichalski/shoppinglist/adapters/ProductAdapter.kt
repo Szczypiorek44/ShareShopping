@@ -12,13 +12,13 @@ import pl.karolmichalski.shoppinglist.models.Product
 import pl.karolmichalski.shoppinglist.viewholders.ProductViewHolder
 
 @BindingAdapter("productList", "onItemClick")
-fun RecyclerView.setProducts(productList: List<Product>, productClickCallback: ProductAdapter.ProductClickCallback) {
+fun RecyclerView.setProducts(productList: List<Product>, onProductClick: (Product) -> Unit) {
 	if (adapter == null)
-		adapter = ProductAdapter(productClickCallback)
+		adapter = ProductAdapter(onProductClick)
 	(adapter as ProductAdapter).submitList(productList)
 }
 
-class ProductAdapter(private val productClickCallback: ProductClickCallback)
+class ProductAdapter(private val onProductClick: (Product) -> Unit)
 	: ListAdapter<Product, ProductViewHolder>(ProductDiff()) {
 
 	init {
@@ -36,7 +36,7 @@ class ProductAdapter(private val productClickCallback: ProductClickCallback)
 	}
 
 	override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ProductViewHolder {
-		return ProductViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), R.layout.item_product, viewGroup, false), productClickCallback)
+		return ProductViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), R.layout.item_product, viewGroup, false), onProductClick)
 	}
 
 	override fun onBindViewHolder(viewHolder: ProductViewHolder, i: Int) {
@@ -45,10 +45,6 @@ class ProductAdapter(private val productClickCallback: ProductClickCallback)
 
 	override fun getItemId(position: Int): Long {
 		return position.toLong()
-	}
-
-	interface ProductClickCallback {
-		fun onProductClick(product: Product)
 	}
 
 }
