@@ -3,12 +3,10 @@ package pl.karolmichalski.shoppinglist.data
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverters
 import android.content.Context
 import pl.karolmichalski.shoppinglist.models.Product
 
 @Database(entities = [(Product::class)], version = 1)
-@TypeConverters(Product.StatusConverter::class)
 abstract class LocalDatabase : RoomDatabase() {
 
 	abstract fun productsDao(): LocalDatabaseDAO
