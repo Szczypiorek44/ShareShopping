@@ -7,18 +7,19 @@ import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import pl.karolmichalski.shoppinglist.models.Product
+import pl.karolmichalski.shoppinglist.data.models.Product
+import pl.karolmichalski.shoppinglist.domain.ProductsRepository
 
-class ProductsRepository(application: Application) {
+class ProductsRepositoryImpl(application: Application) : ProductsRepository {
 
 	private val localDatabase = LocalDatabase.getInstance(application).productsDao()
 	private val cloudDatabase = CloudDatabase.getInstance().getDao()
 
-	fun getAll(): LiveData<List<Product>> {
+	override fun getAll(): LiveData<List<Product>> {
 		return localDatabase.getAll()
 	}
 
-	fun insert(name: String) {
+	override fun insert(name: String) {
 		cloudDatabase.generateKey()?.let { key ->
 			val product = Product(key, name, Product.Status.ADDED)
 			Completable.fromAction { localDatabase.insert(product) }
@@ -33,14 +34,14 @@ class ProductsRepository(application: Application) {
 
 	}
 
-	fun update(product: Product) {
+	override fun update(product: Product) {
 		Completable.fromAction { localDatabase.update(product) }
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe()
 	}
 
-	fun delete(product: Product) {
+	override fun delete(product: Product) {
 		Completable.fromAction { localDatabase.delete(product) }
 				.andThen(cloudDatabase.delete(product))
 				.subscribeOn(Schedulers.io())

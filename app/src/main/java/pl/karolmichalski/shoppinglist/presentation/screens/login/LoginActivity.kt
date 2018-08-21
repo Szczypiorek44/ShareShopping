@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.views
+package pl.karolmichalski.shoppinglist.presentation.screens.login
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -9,8 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.databinding.ActivityLoginBinding
-import pl.karolmichalski.shoppinglist.viewlisteners.LoginListener
-import pl.karolmichalski.shoppinglist.viewmodels.LoginViewModel
+import pl.karolmichalski.shoppinglist.presentation.screens.main.MainActivity
 
 
 class LoginActivity : AppCompatActivity(), LoginListener {

@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.views
+package pl.karolmichalski.shoppinglist.presentation.screens.main
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -10,10 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.karolmichalski.shoppinglist.R
+import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
-import pl.karolmichalski.shoppinglist.models.Product
-import pl.karolmichalski.shoppinglist.viewlisteners.MainListener
-import pl.karolmichalski.shoppinglist.viewmodels.MainViewModel
+import pl.karolmichalski.shoppinglist.presentation.screens.login.LoginActivity
 
 class MainActivity : AppCompatActivity(), MainListener {
 

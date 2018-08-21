@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.viewlisteners
+package pl.karolmichalski.shoppinglist.presentation.screens.login
 
 interface LoginListener {
 	fun onLoginBtnClick()

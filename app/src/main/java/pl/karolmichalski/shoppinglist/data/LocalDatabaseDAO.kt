@@ -3,7 +3,7 @@ package pl.karolmichalski.shoppinglist.data
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
-import pl.karolmichalski.shoppinglist.models.Product
+import pl.karolmichalski.shoppinglist.data.models.Product
 
 @Dao
 interface LocalDatabaseDAO {

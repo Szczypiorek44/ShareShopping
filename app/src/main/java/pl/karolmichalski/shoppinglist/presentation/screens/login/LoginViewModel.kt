@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.viewmodels
+package pl.karolmichalski.shoppinglist.presentation.screens.login
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

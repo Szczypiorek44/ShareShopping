@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="pl.karolmichalski.shoppinglist.viewmodels.MainViewModel" />
+            type="pl.karolmichalski.shoppinglist.presentation.screens.main.MainViewModel" />
 
         <variable
             name="listener"
-            type="pl.karolmichalski.shoppinglist.viewlisteners.MainListener" />
+            type="pl.karolmichalski.shoppinglist.presentation.screens.main.MainListener" />
 
     </data>
 
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".views.MainActivity">
+        tools:context=".presentation.screens.main.MainActivity">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"

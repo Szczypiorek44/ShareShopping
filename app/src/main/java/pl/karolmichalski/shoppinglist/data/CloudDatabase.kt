@@ -6,7 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import io.reactivex.Completable
-import pl.karolmichalski.shoppinglist.models.Product
+import pl.karolmichalski.shoppinglist.data.models.Product
 
 class CloudDatabase private constructor() : CloudDatabaseDAO {
 

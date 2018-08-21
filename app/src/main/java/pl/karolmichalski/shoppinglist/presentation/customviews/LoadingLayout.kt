@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.customviews
+package pl.karolmichalski.shoppinglist.presentation.customviews
 
 import android.content.Context
 import android.graphics.Color

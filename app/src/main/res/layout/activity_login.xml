@@ -7,11 +7,11 @@
 
         <variable
             name="listener"
-            type="pl.karolmichalski.shoppinglist.viewlisteners.LoginListener" />
+            type="pl.karolmichalski.shoppinglist.presentation.screens.login.LoginListener" />
 
         <variable
             name="viewModel"
-            type="pl.karolmichalski.shoppinglist.viewmodels.LoginViewModel" />
+            type="pl.karolmichalski.shoppinglist.presentation.screens.login.LoginViewModel" />
 
     </data>
 
@@ -56,8 +56,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/loginBtn" />
 
-
-        <pl.karolmichalski.shoppinglist.customviews.LoadingLayout
+        <pl.karolmichalski.shoppinglist.presentation.customviews.LoadingLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />

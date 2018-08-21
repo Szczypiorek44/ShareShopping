@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.viewmodels
+package pl.karolmichalski.shoppinglist.presentation.screens.main
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
@@ -6,8 +6,9 @@ import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
-import pl.karolmichalski.shoppinglist.data.ProductsRepository
-import pl.karolmichalski.shoppinglist.models.Product
+import pl.karolmichalski.shoppinglist.data.ProductsRepositoryImpl
+import pl.karolmichalski.shoppinglist.data.models.Product
+import pl.karolmichalski.shoppinglist.domain.ProductsRepository
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -15,7 +16,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 	val productList = MutableLiveData<List<Product>>().apply { value = ArrayList() }
 
-	private val productsRepository by lazy { ProductsRepository(application) }
+	private val productsRepository: ProductsRepository by lazy { ProductsRepositoryImpl(application) }
 
 	fun getProducts(owner: LifecycleOwner) {
 		productsRepository.getAll().observe(owner, Observer {
