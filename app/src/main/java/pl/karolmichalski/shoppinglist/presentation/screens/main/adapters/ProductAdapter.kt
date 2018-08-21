@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.presentation.adapters
+package pl.karolmichalski.shoppinglist.presentation.screens.main.adapters
 
 import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
-import pl.karolmichalski.shoppinglist.presentation.viewholders.ProductViewHolder
+import pl.karolmichalski.shoppinglist.presentation.screens.main.viewholders.ProductViewHolder
 
 @BindingAdapter("productList", "onItemClick")
 fun RecyclerView.setProducts(productList: List<Product>, onProductClick: (Product) -> Unit) {

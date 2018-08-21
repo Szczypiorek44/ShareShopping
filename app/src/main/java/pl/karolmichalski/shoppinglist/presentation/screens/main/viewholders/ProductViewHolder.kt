@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.presentation.viewholders
+package pl.karolmichalski.shoppinglist.presentation.screens.main.viewholders
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
