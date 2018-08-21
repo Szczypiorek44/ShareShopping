@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.presentation.viewholders.ProductViewHolder
-import java.nio.ByteBuffer
 
 @BindingAdapter("productList", "onItemClick")
 fun RecyclerView.setProducts(productList: List<Product>, onProductClick: (Product) -> Unit) {
@@ -45,7 +44,7 @@ class ProductAdapter(private val onProductClick: (Product) -> Unit)
 	}
 
 	override fun getItemId(position: Int): Long {
-		return ByteBuffer.wrap(getItem(position).key.toByteArray()).long
+		return getItem(position).id.toLong()
 	}
 
 }
