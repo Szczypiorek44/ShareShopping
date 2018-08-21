@@ -17,7 +17,7 @@ import pl.karolmichalski.shoppinglist.presentation.screens.login.LoginActivity
 class MainActivity : AppCompatActivity(), MainListener {
 
 	private val viewModel by lazy {
-		ViewModelProviders.of(this).get(MainViewModel::class.java)
+		ViewModelProviders.of(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
 	}
 
 	private val actionModeManager = ActionModeManager()

@@ -1,6 +1,5 @@
 package pl.karolmichalski.shoppinglist.data
 
-import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.util.Log
 import io.reactivex.Completable
@@ -9,10 +8,11 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.domain.ProductsRepository
+import pl.karolmichalski.shoppinglist.presentation.App
 
-class ProductsRepositoryImpl(application: Application) : ProductsRepository {
+class ProductsRepositoryImpl(app: App) : ProductsRepository {
 
-	private val localDatabase = LocalDatabase.getInstance(application).productsDao()
+	private val localDatabase = LocalDatabase.getInstance(app).productsDao()
 	private val cloudDatabase = CloudDatabase.getInstance().getDao()
 
 	override fun getAll(): LiveData<List<Product>> {
