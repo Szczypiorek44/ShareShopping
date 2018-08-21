@@ -2,7 +2,6 @@ package pl.karolmichalski.shoppinglist.presentation.screens.main
 
 import android.app.Application
 import android.arch.lifecycle.*
-import com.google.firebase.auth.FirebaseAuth
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.presentation.App
 
@@ -20,7 +19,7 @@ class MainViewModel(application: Application) : ViewModel() {
 
 	val productList = MutableLiveData<List<Product>>().apply { value = ArrayList() }
 
-	private val productsRepository by lazy { (application as App).productsRepository }
+	private val productsRepository = (application as App).productsRepository
 
 	fun getProducts(owner: LifecycleOwner) {
 		productsRepository.getAll().observe(owner, Observer { savedProductList ->
@@ -45,35 +44,28 @@ class MainViewModel(application: Application) : ViewModel() {
 
 	fun removeCheckedProducts() {
 		productList.value?.forEach { product ->
-			if (product.isChecked)
+			if (selectedProducts.contains(product.key)) {
 				productsRepository.delete(product)
+				selectedProducts.remove(product.key)
+			}
 		}
 	}
 
 	fun getCheckedProductsCount(): Int {
-		var count = 0
-		productList.value?.forEach { product ->
-			if (product.isChecked)
-				count++
-		}
-		return count
+		return selectedProducts.size
 	}
 
 	fun deselectAllProducts() {
 		productList.value?.forEach { product ->
-			if (product.isChecked) {
+			if (selectedProducts.contains(product.key)) {
 				product.isChecked = false
-				invalidateProductSelection(product) //database needs to know that product is unchecked
+				selectedProducts.remove(product.key)
 			}
 		}
 	}
 
 	fun clearProductName() {
 		productName.value = ""
-	}
-
-	fun isUserLogged(): Boolean {
-		return FirebaseAuth.getInstance().currentUser != null
 	}
 
 }

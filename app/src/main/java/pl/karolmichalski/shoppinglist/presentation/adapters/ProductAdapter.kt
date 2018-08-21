@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.presentation.viewholders.ProductViewHolder
+import java.nio.ByteBuffer
 
 @BindingAdapter("productList", "onItemClick")
 fun RecyclerView.setProducts(productList: List<Product>, onProductClick: (Product) -> Unit) {
@@ -27,7 +28,7 @@ class ProductAdapter(private val onProductClick: (Product) -> Unit)
 
 	class ProductDiff : DiffUtil.ItemCallback<Product>() {
 		override fun areItemsTheSame(oldItem: Product?, newItem: Product?): Boolean {
-			return oldItem == newItem
+			return oldItem?.key == newItem?.key
 		}
 
 		override fun areContentsTheSame(oldItem: Product?, newItem: Product?): Boolean {
@@ -44,7 +45,7 @@ class ProductAdapter(private val onProductClick: (Product) -> Unit)
 	}
 
 	override fun getItemId(position: Int): Long {
-		return position.toLong()
+		return ByteBuffer.wrap(getItem(position).key.toByteArray()).long
 	}
 
 }
