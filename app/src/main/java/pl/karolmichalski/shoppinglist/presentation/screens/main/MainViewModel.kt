@@ -14,15 +14,18 @@ class MainViewModel(application: Application) : ViewModel() {
 		}
 	}
 
+	private val selectedProducts = HashSet<String>()
+
 	val productName = MutableLiveData<String>()
 
 	val productList = MutableLiveData<List<Product>>().apply { value = ArrayList() }
 
-	private val productsRepository = (application as App).productsRepository
+	private val productsRepository by lazy { (application as App).productsRepository }
 
 	fun getProducts(owner: LifecycleOwner) {
-		productsRepository.getAll().observe(owner, Observer {
-			productList.value = it
+		productsRepository.getAll().observe(owner, Observer { savedProductList ->
+			savedProductList?.map { it.isChecked = selectedProducts.contains(it.key) }
+			productList.value = savedProductList
 		})
 	}
 
@@ -32,13 +35,17 @@ class MainViewModel(application: Application) : ViewModel() {
 		}
 	}
 
-	fun updateProduct(product: Product) {
-		productsRepository.update(product)
+	fun invalidateProductSelection(product: Product) {
+		product.isChecked = product.isChecked.not()
+		if (product.isChecked)
+			selectedProducts.add(product.key)
+		else
+			selectedProducts.remove(product.key)
 	}
 
 	fun removeCheckedProducts() {
 		productList.value?.forEach { product ->
-			if (product.checked)
+			if (product.isChecked)
 				productsRepository.delete(product)
 		}
 	}
@@ -46,7 +53,7 @@ class MainViewModel(application: Application) : ViewModel() {
 	fun getCheckedProductsCount(): Int {
 		var count = 0
 		productList.value?.forEach { product ->
-			if (product.checked)
+			if (product.isChecked)
 				count++
 		}
 		return count
@@ -54,9 +61,9 @@ class MainViewModel(application: Application) : ViewModel() {
 
 	fun deselectAllProducts() {
 		productList.value?.forEach { product ->
-			if (product.checked) {
-				product.checked = false
-				updateProduct(product) //database needs to know that product is unchecked
+			if (product.isChecked) {
+				product.isChecked = false
+				invalidateProductSelection(product) //database needs to know that product is unchecked
 			}
 		}
 	}

@@ -16,7 +16,6 @@ class ProductViewHolder(private val binding: ItemProductBinding,
 
 	override fun onClick(v: View?) {
 		binding.product?.apply {
-			checked = !checked
 			onProductClick(this)
 		}
 		binding.invalidateAll()
