@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import pl.karolmichalski.shoppinglist.data.models.Product
 
-@Database(entities = [(Product::class)], version = 1)
+@Database(entities = [(Product::class)], version = 2)
 abstract class LocalDatabase : RoomDatabase() {
 
 	abstract fun productsDao(): LocalDatabaseDAO
@@ -18,7 +18,10 @@ abstract class LocalDatabase : RoomDatabase() {
 		fun getInstance(context: Context): LocalDatabase {
 			if (INSTANCE == null) {
 				synchronized(LocalDatabase::class) {
-					INSTANCE = Room.databaseBuilder(context.applicationContext, LocalDatabase::class.java, "shopping.db").build()
+					INSTANCE = Room
+							.databaseBuilder(context.applicationContext, LocalDatabase::class.java, "shopping.db")
+							.fallbackToDestructiveMigration()
+							.build()
 				}
 			}
 			return INSTANCE!!
