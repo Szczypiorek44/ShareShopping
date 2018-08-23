@@ -14,6 +14,9 @@ import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
 import pl.karolmichalski.shoppinglist.presentation.screens.login.LoginActivity
+import pl.karolmichalski.shoppinglist.presentation.utils.addSelectedProducts
+import pl.karolmichalski.shoppinglist.presentation.utils.getSelectedProducts
+
 
 class MainActivity : AppCompatActivity(), MainListener {
 
@@ -31,8 +34,22 @@ class MainActivity : AppCompatActivity(), MainListener {
 			startLoginActivity()
 	}
 
+	override fun onSaveInstanceState(outState: Bundle?) {
+		super.onSaveInstanceState(outState)
+		outState?.addSelectedProducts(viewModel.selectedProducts)
+	}
+
+	override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+		super.onRestoreInstanceState(savedInstanceState)
+		savedInstanceState?.getSelectedProducts()?.let {
+			viewModel.selectedProducts.addAll(it)
+		}
+	}
+
 	override fun onAddBtnClick() {
-		viewModel.addProduct()
+		viewModel.productName.value?.let {
+			viewModel.addProduct(it)
+		}
 		viewModel.clearProductName()
 	}
 
@@ -65,7 +82,7 @@ class MainActivity : AppCompatActivity(), MainListener {
 		private var isActive = false
 
 		fun invalidate() {
-			val checkedProductCount = viewModel.getCheckedProductsCount()
+			val checkedProductCount = viewModel.selectedProducts.size
 			if (checkedProductCount > 0 && !isActive)
 				startSupportActionMode(actionModeCallback)
 			updateCount()
@@ -74,7 +91,7 @@ class MainActivity : AppCompatActivity(), MainListener {
 		}
 
 		private fun updateCount() {
-			menu?.findItem(R.id.count)?.title = viewModel.getCheckedProductsCount().toString()
+			menu?.findItem(R.id.count)?.title = viewModel.selectedProducts.size.toString()
 		}
 
 		private val actionModeCallback = object : ActionMode.Callback {

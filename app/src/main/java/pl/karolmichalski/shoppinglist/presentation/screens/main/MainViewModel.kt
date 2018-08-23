@@ -17,49 +17,43 @@ class MainViewModel(application: Application) : ViewModel() {
 
 	val productList = MutableLiveData<List<Product>>().apply { value = ArrayList() }
 
-	private val selectedProductsSet = HashSet<String>()
+	val selectedProducts = HashSet<String>()
 
 	private val productsRepository = (application as App).productsRepository
 
 	fun getProducts(owner: LifecycleOwner) {
 		productsRepository.getAll().observe(owner, Observer { savedProductList ->
-			savedProductList?.map { it.isChecked = selectedProductsSet.contains(it.key) }
+			savedProductList?.map { it.isChecked = selectedProducts.contains(it.key) }
 			productList.value = savedProductList
 		})
 	}
 
-	fun addProduct() {
-		productName.value?.let {
-			productsRepository.insert(it)
-		}
+	fun addProduct(name: String) {
+		productsRepository.insert(name)
 	}
 
 	fun invalidateProductSelection(product: Product) {
 		product.isChecked = product.isChecked.not()
 		if (product.isChecked)
-			selectedProductsSet.add(product.key)
+			selectedProducts.add(product.key)
 		else
-			selectedProductsSet.remove(product.key)
+			selectedProducts.remove(product.key)
 	}
 
 	fun removeCheckedProducts() {
 		productList.value?.forEach { product ->
-			if (selectedProductsSet.contains(product.key)) {
+			if (selectedProducts.contains(product.key)) {
 				productsRepository.delete(product)
-				selectedProductsSet.remove(product.key)
+				selectedProducts.remove(product.key)
 			}
 		}
 	}
 
-	fun getCheckedProductsCount(): Int {
-		return selectedProductsSet.size
-	}
-
 	fun deselectAllProducts() {
 		productList.value?.forEach { product ->
-			if (selectedProductsSet.contains(product.key)) {
+			if (selectedProducts.contains(product.key)) {
 				product.isChecked = false
-				selectedProductsSet.remove(product.key)
+				selectedProducts.remove(product.key)
 			}
 		}
 	}
