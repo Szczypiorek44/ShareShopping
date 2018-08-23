@@ -31,8 +31,20 @@ class ProductAdapter(private val onProductClick: (Product) -> Unit)
 		}
 	}
 
+	private var recyclerView: RecyclerView? = null
+
 	init {
 		setHasStableIds(true)
+	}
+
+	override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+		this.recyclerView = recyclerView
+	}
+
+	override fun submitList(list: List<Product>) {
+		super.submitList(list)
+		if (list.size > itemCount)
+			recyclerView?.smoothScrollToPosition(list.size)
 	}
 
 	override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ProductViewHolder {
