@@ -6,25 +6,25 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.view.ActionMode
-import android.view.Menu
-import android.view.MenuItem
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
 import pl.karolmichalski.shoppinglist.presentation.screens.login.LoginActivity
+import pl.karolmichalski.shoppinglist.presentation.utils.ActionModeManager
 import pl.karolmichalski.shoppinglist.presentation.utils.addSelectedProducts
 import pl.karolmichalski.shoppinglist.presentation.utils.getSelectedProducts
 
 
-class MainActivity : AppCompatActivity(), MainListener {
+class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callback {
 
 	private val viewModel by lazy {
 		ViewModelProviders.of(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
 	}
 
-	private val actionModeManager = ActionModeManager()
+	private val actionModeManager by lazy {
+		ActionModeManager(this)
+	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity(), MainListener {
 	}
 
 	override fun onAddBtnClick() {
-		viewModel.productName.value?.let {
-			viewModel.addProduct(it)
+		viewModel.productName.value?.let { name ->
+			viewModel.addProduct(name)
 		}
 		viewModel.clearProductName()
 	}
@@ -56,8 +56,22 @@ class MainActivity : AppCompatActivity(), MainListener {
 	override fun onProductClick(): (Product) -> Unit {
 		return {
 			viewModel.invalidateProductSelection(it)
-			actionModeManager.invalidate()
+			val checkedProductsCount = viewModel.selectedProducts.size
+			actionModeManager.invalidateCount(checkedProductsCount)
 		}
+	}
+
+	override fun onStartSupportActionMode(callback: ActionMode.Callback): ActionMode? {
+		return startSupportActionMode(callback)
+	}
+
+	override fun onDeleteButtonClicked() {
+		viewModel.removeCheckedProducts()
+	}
+
+	override fun onActionModeDestroyed() {
+		viewModel.deselectAllProducts()
+		viewModel.productList.value = viewModel.productList.value
 	}
 
 	private fun init() {
@@ -73,58 +87,4 @@ class MainActivity : AppCompatActivity(), MainListener {
 		startActivity(Intent(this, LoginActivity::class.java))
 		finish()
 	}
-
-	inner class ActionModeManager {
-
-		private var mode: ActionMode? = null
-		private var menu: Menu? = null
-
-		private var isActive = false
-
-		fun invalidate() {
-			val checkedProductCount = viewModel.selectedProducts.size
-			if (checkedProductCount > 0 && !isActive)
-				startSupportActionMode(actionModeCallback)
-			updateCount()
-			if (checkedProductCount == 0)
-				mode?.finish()
-		}
-
-		private fun updateCount() {
-			menu?.findItem(R.id.count)?.title = viewModel.selectedProducts.size.toString()
-		}
-
-		private val actionModeCallback = object : ActionMode.Callback {
-			override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-				this@ActionModeManager.mode = mode
-				this@ActionModeManager.menu = menu
-				this@ActionModeManager.isActive = true
-				mode?.menuInflater?.inflate(R.menu.menu, menu)
-				return true
-			}
-
-			override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-				return false
-			}
-
-			override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-				if (item?.itemId == R.id.delete) {
-					viewModel.removeCheckedProducts()
-					mode?.finish()
-					return true
-				}
-				return false
-			}
-
-			override fun onDestroyActionMode(mode: ActionMode?) {
-				this@ActionModeManager.mode = null
-				this@ActionModeManager.menu = null
-				this@ActionModeManager.isActive = false
-				viewModel.deselectAllProducts()
-				recyclerView.adapter.notifyDataSetChanged()
-			}
-		}
-	}
-
-
 }

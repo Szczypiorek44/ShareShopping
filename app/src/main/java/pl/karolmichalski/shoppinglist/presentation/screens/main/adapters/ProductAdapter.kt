@@ -45,6 +45,8 @@ class ProductAdapter(private val onProductClick: (Product) -> Unit)
 		super.submitList(list)
 		if (list.size > itemCount)
 			recyclerView?.smoothScrollToPosition(list.size)
+		else if (list.size == itemCount)
+			notifyDataSetChanged()
 	}
 
 	override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ProductViewHolder {
