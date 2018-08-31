@@ -11,6 +11,7 @@ class MainViewModel(app: App) : ViewModel() {
 
 	class Factory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+			@Suppress("UNCHECKED_CAST")
 			return MainViewModel(application as App) as T
 		}
 	}
