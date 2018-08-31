@@ -3,7 +3,7 @@ Welcome to my ShoppingList application.
 
 I'm using this app as my training project (just to develop my skills) and also as an everyday use application ;)
 
-Recipe:<br />
+Ingredients:<br />
 -MVVM<br />
 -LiveData<br />
 -DataBinding<br />
