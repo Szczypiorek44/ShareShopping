@@ -3,7 +3,7 @@ package pl.karolmichalski.shoppinglist.presentation.screens.main
 import android.app.Application
 import android.arch.lifecycle.*
 import pl.karolmichalski.shoppinglist.data.models.Product
-import pl.karolmichalski.shoppinglist.domain.ProductsRepository
+import pl.karolmichalski.shoppinglist.domain.ProductRepository
 import pl.karolmichalski.shoppinglist.presentation.App
 import javax.inject.Inject
 
@@ -22,21 +22,21 @@ class MainViewModel(app: App) : ViewModel() {
 	val selectedProducts = HashSet<String>()
 
 	@Inject
-	lateinit var productsRepository: ProductsRepository
+	lateinit var productRepository: ProductRepository
 
 	init {
 		app.productRepositoryComponent.inject(this)
 	}
 
 	fun getProducts(owner: LifecycleOwner) {
-		productsRepository.getAll().observe(owner, Observer { savedProductList ->
+		productRepository.getAll().observe(owner, Observer { savedProductList ->
 			savedProductList?.map { it.isChecked = selectedProducts.contains(it.key) }
 			productList.value = savedProductList
 		})
 	}
 
 	fun addProduct(name: String) {
-		productsRepository.insert(name)
+		productRepository.insert(name)
 	}
 
 	fun invalidateProductSelection(product: Product) {
@@ -50,7 +50,7 @@ class MainViewModel(app: App) : ViewModel() {
 	fun removeCheckedProducts() {
 		productList.value?.forEach { product ->
 			if (selectedProducts.contains(product.key)) {
-				productsRepository.delete(product)
+				productRepository.delete(product)
 				selectedProducts.remove(product.key)
 			}
 		}

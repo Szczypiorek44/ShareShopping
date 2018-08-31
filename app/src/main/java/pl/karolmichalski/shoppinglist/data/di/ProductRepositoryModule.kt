@@ -5,7 +5,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import pl.karolmichalski.shoppinglist.data.*
-import pl.karolmichalski.shoppinglist.domain.ProductsRepository
+import pl.karolmichalski.shoppinglist.domain.ProductRepository
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -16,8 +16,8 @@ class ProductRepositoryModule(private val context: Context) {
 	@Singleton
 	fun provideProductsRepository(
 			@Named("localDatabase") localDatabase: LocalDatabaseDAO,
-			@Named("cloudDatabase") cloudDatabase: CloudDatabaseDAO): ProductsRepository {
-		return ProductsRepositoryImpl(localDatabase, cloudDatabase)
+			@Named("cloudDatabase") cloudDatabase: CloudDatabaseDAO): ProductRepository {
+		return ProductRepositoryImpl(localDatabase, cloudDatabase)
 	}
 
 	@Provides

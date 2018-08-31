@@ -3,7 +3,7 @@ package pl.karolmichalski.shoppinglist.domain
 import android.arch.lifecycle.LiveData
 import pl.karolmichalski.shoppinglist.data.models.Product
 
-interface ProductsRepository {
+interface ProductRepository {
 
 	fun getAll(): LiveData<List<Product>>
 
