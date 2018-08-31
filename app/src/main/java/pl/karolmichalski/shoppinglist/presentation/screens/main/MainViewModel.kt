@@ -3,9 +3,11 @@ package pl.karolmichalski.shoppinglist.presentation.screens.main
 import android.app.Application
 import android.arch.lifecycle.*
 import pl.karolmichalski.shoppinglist.data.models.Product
+import pl.karolmichalski.shoppinglist.domain.ProductsRepository
 import pl.karolmichalski.shoppinglist.presentation.App
+import javax.inject.Inject
 
-class MainViewModel(application: Application) : ViewModel() {
+class MainViewModel(app: App) : ViewModel() {
 
 	class Factory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -19,7 +21,12 @@ class MainViewModel(application: Application) : ViewModel() {
 
 	val selectedProducts = HashSet<String>()
 
-	private val productsRepository = (application as App).productsRepository
+	@Inject
+	lateinit var productsRepository: ProductsRepository
+
+	init {
+		app.productRepositoryComponent.inject(this)
+	}
 
 	fun getProducts(owner: LifecycleOwner) {
 		productsRepository.getAll().observe(owner, Observer { savedProductList ->

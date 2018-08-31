@@ -1,11 +1,14 @@
 package pl.karolmichalski.shoppinglist.presentation
 
 import android.app.Application
-import pl.karolmichalski.shoppinglist.data.ProductsRepositoryImpl
-import pl.karolmichalski.shoppinglist.domain.ProductsRepository
+import pl.karolmichalski.shoppinglist.data.di.ProductRepositoryComponent
+import pl.karolmichalski.shoppinglist.data.di.ProductRepositoryModule
+import pl.karolmichalski.shoppinglist.presentation.screens.main.DaggerMainComponent
 
 class App : Application() {
 
-	val productsRepository: ProductsRepository by lazy { ProductsRepositoryImpl(this) }
+	val productRepositoryComponent: ProductRepositoryComponent by lazy {
+		DaggerMainComponent.builder().mainModule(ProductRepositoryModule(applicationContext)).build()
+	}
 
 }
