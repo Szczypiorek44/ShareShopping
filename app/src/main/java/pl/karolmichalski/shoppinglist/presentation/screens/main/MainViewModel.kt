@@ -25,7 +25,7 @@ class MainViewModel(app: App) : ViewModel() {
 	lateinit var productRepository: ProductRepository
 
 	init {
-		app.productRepositoryComponent.inject(this)
+		app.productComponent.inject(this)
 	}
 
 	fun getProducts(owner: LifecycleOwner) {

@@ -10,7 +10,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
-class ProductRepositoryModule(private val context: Context) {
+class ProductModule(private val context: Context) {
 
 	@Provides
 	@Singleton
