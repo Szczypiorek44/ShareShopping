@@ -7,7 +7,7 @@ import pl.karolmichalski.shoppinglist.domain.ProductRepository
 import pl.karolmichalski.shoppinglist.presentation.App
 import javax.inject.Inject
 
-class MainViewModel(app: App) : ViewModel() {
+class MainViewModel(val app: App) : ViewModel() {
 
 	class Factory(private val application: Application) : ViewModelProvider.NewInstanceFactory() {
 		override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -25,7 +25,7 @@ class MainViewModel(app: App) : ViewModel() {
 	lateinit var productRepository: ProductRepository
 
 	init {
-		app.productRepositoryComponent.inject(this)
+		app.productComponent.inject(this)
 	}
 
 	fun getProducts(owner: LifecycleOwner) {

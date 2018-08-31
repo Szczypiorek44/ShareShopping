@@ -5,7 +5,7 @@ import pl.karolmichalski.shoppinglist.presentation.screens.main.MainViewModel
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ProductRepositoryModule::class])
-interface ProductRepositoryComponent {
+@Component(modules = [ProductModule::class])
+interface ProductComponent {
 	fun inject(mainViewModel: MainViewModel)
 }
