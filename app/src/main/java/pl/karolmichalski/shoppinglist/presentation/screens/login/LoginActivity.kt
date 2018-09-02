@@ -15,10 +15,7 @@ import pl.karolmichalski.shoppinglist.presentation.screens.main.MainActivity
 class LoginActivity : AppCompatActivity(), LoginListener {
 
 	private val viewModel by lazy {
-		ViewModelProviders.of(this).get(LoginViewModel::class.java).apply {
-			loginSuccess.observe(this@LoginActivity, onLoginSuccess)
-			errorMessage.observe(this@LoginActivity, showError)
-		}
+		ViewModelProviders.of(this, LoginViewModel.Factory(application)).get(LoginViewModel::class.java)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +25,8 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 			listener = this@LoginActivity
 			viewModel = this@LoginActivity.viewModel
 		}
+		viewModel.loginSuccess.observe(this@LoginActivity, onLoginSuccess)
+		viewModel.errorMessage.observe(this@LoginActivity, showError)
 	}
 
 	override fun onLoginBtnClick() {
