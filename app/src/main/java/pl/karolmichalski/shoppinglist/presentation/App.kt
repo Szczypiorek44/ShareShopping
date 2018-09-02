@@ -1,9 +1,9 @@
 package pl.karolmichalski.shoppinglist.presentation
 
 import android.app.Application
-import pl.karolmichalski.shoppinglist.data.di.DaggerProductComponent
-import pl.karolmichalski.shoppinglist.data.di.ProductComponent
-import pl.karolmichalski.shoppinglist.data.di.ProductModule
+import pl.karolmichalski.shoppinglist.data.product.ProductModule
+import pl.karolmichalski.shoppinglist.domain.DaggerProductComponent
+import pl.karolmichalski.shoppinglist.domain.ProductComponent
 
 class App : Application() {
 

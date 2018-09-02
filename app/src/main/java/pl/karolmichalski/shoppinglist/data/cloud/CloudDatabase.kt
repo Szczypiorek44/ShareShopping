@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.data
+package pl.karolmichalski.shoppinglist.data.cloud
 
 import com.androidhuman.rxfirebase2.database.rxRemoveValue
 import com.androidhuman.rxfirebase2.database.rxSetValue

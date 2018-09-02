@@ -1,6 +1,7 @@
-package pl.karolmichalski.shoppinglist.data.di
+package pl.karolmichalski.shoppinglist.domain
 
 import dagger.Component
+import pl.karolmichalski.shoppinglist.data.product.ProductModule
 import pl.karolmichalski.shoppinglist.presentation.screens.main.MainViewModel
 import javax.inject.Singleton
 

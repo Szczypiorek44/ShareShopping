@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.data
+package pl.karolmichalski.shoppinglist.data.cloud
 
 import io.reactivex.Completable
 import pl.karolmichalski.shoppinglist.data.models.Product

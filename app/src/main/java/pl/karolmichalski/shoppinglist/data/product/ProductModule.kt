@@ -1,10 +1,13 @@
-package pl.karolmichalski.shoppinglist.data.di
+package pl.karolmichalski.shoppinglist.data.product
 
 import android.arch.persistence.room.Room
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import pl.karolmichalski.shoppinglist.data.*
+import pl.karolmichalski.shoppinglist.data.cloud.CloudDatabase
+import pl.karolmichalski.shoppinglist.data.cloud.CloudDatabaseDAO
+import pl.karolmichalski.shoppinglist.data.local.LocalDatabase
+import pl.karolmichalski.shoppinglist.data.local.LocalDatabaseDAO
 import pl.karolmichalski.shoppinglist.domain.ProductRepository
 import javax.inject.Named
 import javax.inject.Singleton

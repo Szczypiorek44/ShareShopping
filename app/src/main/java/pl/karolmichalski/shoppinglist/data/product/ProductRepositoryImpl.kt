@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.data
+package pl.karolmichalski.shoppinglist.data.product
 
 import android.arch.lifecycle.LiveData
 import android.util.Log
@@ -6,6 +6,8 @@ import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import pl.karolmichalski.shoppinglist.data.cloud.CloudDatabaseDAO
+import pl.karolmichalski.shoppinglist.data.local.LocalDatabaseDAO
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.domain.ProductRepository
 
