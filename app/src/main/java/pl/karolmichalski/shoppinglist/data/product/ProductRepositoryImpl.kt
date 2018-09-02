@@ -7,13 +7,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import pl.karolmichalski.shoppinglist.data.models.Product
-import pl.karolmichalski.shoppinglist.data.product.cloud.CloudDatabaseDAO
+import pl.karolmichalski.shoppinglist.data.product.cloud.CloudDatabase
 import pl.karolmichalski.shoppinglist.data.product.local.LocalDatabaseDAO
 import pl.karolmichalski.shoppinglist.domain.product.ProductRepository
 
 class ProductRepositoryImpl(
 		private val localDatabase: LocalDatabaseDAO,
-		private val cloudDatabase: CloudDatabaseDAO) : ProductRepository {
+		private val cloudDatabase: CloudDatabase) : ProductRepository {
 
 	override fun getAll(): LiveData<List<Product>> {
 		return localDatabase.getAll()

@@ -20,6 +20,14 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		if (viewModel.isUserLogged()) {
+			MainActivity.start(this)
+			finish()
+		} else
+			init()
+	}
+
+	private fun init() {
 		DataBindingUtil.setContentView<ActivityLoginBinding>(this, R.layout.activity_login).apply {
 			setLifecycleOwner(this@LoginActivity)
 			listener = this@LoginActivity

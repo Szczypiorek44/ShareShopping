@@ -2,10 +2,11 @@ package pl.karolmichalski.shoppinglist.data.product
 
 import android.arch.persistence.room.Room
 import android.content.Context
+import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
 import pl.karolmichalski.shoppinglist.data.product.cloud.CloudDatabase
-import pl.karolmichalski.shoppinglist.data.product.cloud.CloudDatabaseDAO
+import pl.karolmichalski.shoppinglist.data.product.cloud.CloudDatabaseImpl
 import pl.karolmichalski.shoppinglist.data.product.local.LocalDatabase
 import pl.karolmichalski.shoppinglist.data.product.local.LocalDatabaseDAO
 import pl.karolmichalski.shoppinglist.domain.product.ProductRepository
@@ -19,7 +20,7 @@ class ProductModule(private val context: Context) {
 	@Singleton
 	fun provideProductsRepository(
 			@Named("localDatabase") localDatabase: LocalDatabaseDAO,
-			@Named("cloudDatabase") cloudDatabase: CloudDatabaseDAO): ProductRepository {
+			@Named("cloudDatabase") cloudDatabase: CloudDatabase): ProductRepository {
 		return ProductRepositoryImpl(localDatabase, cloudDatabase)
 	}
 
@@ -36,7 +37,8 @@ class ProductModule(private val context: Context) {
 	@Provides
 	@Singleton
 	@Named("cloudDatabase")
-	fun provideCloudDatabase(): CloudDatabaseDAO {
-		return CloudDatabase.getInstance().getDao()
+	fun provideCloudDatabase(): CloudDatabase {
+		return CloudDatabaseImpl(FirebaseDatabase.getInstance())
 	}
+
 }

@@ -74,8 +74,4 @@ class MainViewModel(app: App) : ViewModel() {
 		productName.value = ""
 	}
 
-	fun isUserLogged(): Boolean {
-		return userRepository.getCurrentUser() != null
-	}
-
 }

@@ -52,5 +52,9 @@ class LoginViewModel(app: App) : ViewModel() {
 				)
 	}
 
+	fun isUserLogged(): Boolean {
+		return userRepository.getCurrentUser() != null
+	}
+
 
 }

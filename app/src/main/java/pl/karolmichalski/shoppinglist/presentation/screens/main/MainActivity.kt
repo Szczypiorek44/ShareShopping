@@ -1,6 +1,7 @@
 package pl.karolmichalski.shoppinglist.presentation.screens.main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -9,7 +10,6 @@ import android.support.v7.view.ActionMode
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
-import pl.karolmichalski.shoppinglist.presentation.screens.login.LoginActivity
 import pl.karolmichalski.shoppinglist.presentation.utils.ActionModeManager
 import pl.karolmichalski.shoppinglist.presentation.utils.addSelectedProducts
 import pl.karolmichalski.shoppinglist.presentation.utils.getSelectedProducts
@@ -25,12 +25,20 @@ class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callba
 		ActionModeManager(this)
 	}
 
+	companion object {
+		fun start(context: Context){
+			context.startActivity(Intent(context, MainActivity::class.java))
+		}
+	}
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		if (viewModel.isUserLogged())
-			init()
-		else
-			startLoginActivity()
+		DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
+			setLifecycleOwner(this@MainActivity)
+			viewModel = this@MainActivity.viewModel
+			listener = this@MainActivity
+		}
+		viewModel.getProducts(this)
 	}
 
 	override fun onSaveInstanceState(outState: Bundle?) {
@@ -71,19 +79,5 @@ class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callba
 	override fun onActionModeDestroyed() {
 		viewModel.deselectAllProducts()
 		viewModel.productList.value = viewModel.productList.value
-	}
-
-	private fun init() {
-		DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
-			setLifecycleOwner(this@MainActivity)
-			viewModel = this@MainActivity.viewModel
-			listener = this@MainActivity
-		}
-		viewModel.getProducts(this)
-	}
-
-	private fun startLoginActivity() {
-		startActivity(Intent(this, LoginActivity::class.java))
-		finish()
 	}
 }
