@@ -3,7 +3,7 @@ package pl.karolmichalski.shoppinglist.presentation.screens.main
 import android.app.Application
 import android.arch.lifecycle.*
 import pl.karolmichalski.shoppinglist.data.models.Product
-import pl.karolmichalski.shoppinglist.domain.ProductRepository
+import pl.karolmichalski.shoppinglist.domain.product.ProductRepository
 import pl.karolmichalski.shoppinglist.presentation.App
 import javax.inject.Inject
 

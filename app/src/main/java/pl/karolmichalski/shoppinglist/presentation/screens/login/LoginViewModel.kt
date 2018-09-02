@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import io.reactivex.rxkotlin.subscribeBy
-import pl.karolmichalski.shoppinglist.domain.UserRepository
+import pl.karolmichalski.shoppinglist.domain.user.UserRepository
 import pl.karolmichalski.shoppinglist.presentation.App
 import javax.inject.Inject
 

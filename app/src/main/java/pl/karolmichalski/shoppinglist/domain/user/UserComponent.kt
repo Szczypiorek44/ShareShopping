@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.domain
+package pl.karolmichalski.shoppinglist.domain.user
 
 import dagger.Component
 import pl.karolmichalski.shoppinglist.data.user.UserModule

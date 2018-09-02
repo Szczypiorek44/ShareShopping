@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.domain
+package pl.karolmichalski.shoppinglist.domain.product
 
 import android.arch.lifecycle.LiveData
 import pl.karolmichalski.shoppinglist.data.models.Product

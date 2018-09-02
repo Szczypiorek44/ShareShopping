@@ -2,10 +2,10 @@ package pl.karolmichalski.shoppinglist.presentation
 
 import android.app.Application
 import pl.karolmichalski.shoppinglist.data.product.ProductModule
-import pl.karolmichalski.shoppinglist.domain.DaggerProductComponent
-import pl.karolmichalski.shoppinglist.domain.DaggerUserComponent
-import pl.karolmichalski.shoppinglist.domain.ProductComponent
-import pl.karolmichalski.shoppinglist.domain.UserComponent
+import pl.karolmichalski.shoppinglist.domain.product.DaggerProductComponent
+import pl.karolmichalski.shoppinglist.domain.product.ProductComponent
+import pl.karolmichalski.shoppinglist.domain.user.DaggerUserComponent
+import pl.karolmichalski.shoppinglist.domain.user.UserComponent
 
 class App : Application() {
 

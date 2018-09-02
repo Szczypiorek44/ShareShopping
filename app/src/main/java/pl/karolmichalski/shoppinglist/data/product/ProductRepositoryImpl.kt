@@ -6,10 +6,10 @@ import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import pl.karolmichalski.shoppinglist.data.cloud.CloudDatabaseDAO
-import pl.karolmichalski.shoppinglist.data.local.LocalDatabaseDAO
 import pl.karolmichalski.shoppinglist.data.models.Product
-import pl.karolmichalski.shoppinglist.domain.ProductRepository
+import pl.karolmichalski.shoppinglist.data.product.cloud.CloudDatabaseDAO
+import pl.karolmichalski.shoppinglist.data.product.local.LocalDatabaseDAO
+import pl.karolmichalski.shoppinglist.domain.product.ProductRepository
 
 class ProductRepositoryImpl(
 		private val localDatabase: LocalDatabaseDAO,

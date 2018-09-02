@@ -1,4 +1,4 @@
-package pl.karolmichalski.shoppinglist.data.local
+package pl.karolmichalski.shoppinglist.data.product.local
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
