@@ -2,21 +2,17 @@ package pl.karolmichalski.shoppinglist.presentation
 
 import android.app.Application
 import pl.karolmichalski.shoppinglist.data.product.ProductModule
-import pl.karolmichalski.shoppinglist.domain.product.DaggerProductComponent
-import pl.karolmichalski.shoppinglist.domain.product.ProductComponent
-import pl.karolmichalski.shoppinglist.domain.user.DaggerUserComponent
-import pl.karolmichalski.shoppinglist.domain.user.UserComponent
+import pl.karolmichalski.shoppinglist.data.user.UserModule
+import pl.karolmichalski.shoppinglist.domain.AppComponent
+import pl.karolmichalski.shoppinglist.domain.DaggerAppComponent
 
 class App : Application() {
 
-	val productComponent: ProductComponent by lazy {
-		DaggerProductComponent.builder()
+	val appComponent: AppComponent by lazy {
+		DaggerAppComponent.builder()
+				.userModule(UserModule())
 				.productModule(ProductModule(applicationContext))
 				.build()
-	}
-
-	val userComponent: UserComponent by lazy {
-		DaggerUserComponent.create()
 	}
 
 }

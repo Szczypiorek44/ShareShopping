@@ -6,7 +6,6 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.view.ActionMode
-import com.google.firebase.auth.FirebaseAuth
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callba
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		if (FirebaseAuth.getInstance().currentUser != null)
+		if (viewModel.isUserLogged())
 			init()
 		else
 			startLoginActivity()

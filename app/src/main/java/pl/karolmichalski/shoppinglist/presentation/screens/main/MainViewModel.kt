@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.*
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.domain.product.ProductRepository
+import pl.karolmichalski.shoppinglist.domain.user.UserRepository
 import pl.karolmichalski.shoppinglist.presentation.App
 import javax.inject.Inject
 
@@ -25,8 +26,11 @@ class MainViewModel(app: App) : ViewModel() {
 	@Inject
 	lateinit var productRepository: ProductRepository
 
+	@Inject
+	lateinit var userRepository: UserRepository
+
 	init {
-		app.productComponent.inject(this)
+		app.appComponent.inject(this)
 	}
 
 	fun getProducts(owner: LifecycleOwner) {
@@ -68,6 +72,10 @@ class MainViewModel(app: App) : ViewModel() {
 
 	fun clearProductName() {
 		productName.value = ""
+	}
+
+	fun isUserLogged(): Boolean {
+		return userRepository.getCurrentUser() != null
 	}
 
 }

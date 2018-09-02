@@ -29,7 +29,7 @@ class LoginViewModel(app: App) : ViewModel() {
 	lateinit var userRepository: UserRepository
 
 	init {
-		app.userComponent.inject(this)
+		app.appComponent.inject(this)
 	}
 
 	fun signInWithEmailAndPassword() {
