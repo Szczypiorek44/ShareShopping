@@ -32,7 +32,7 @@ class LoginViewModel(app: App) : ViewModel() {
 		app.appComponent.inject(this)
 	}
 
-	fun signInWithEmailAndPassword() {
+	fun logInWithEmailAndPassword() {
 		userRepository.login(email.value, password.value)
 				.doOnSubscribe { isLoading.value = true }
 				.doFinally { isLoading.value = false }
@@ -42,7 +42,7 @@ class LoginViewModel(app: App) : ViewModel() {
 				)
 	}
 
-	fun createUserWithEmailAndPassword() {
+	fun registerWithEmailAndPassword() {
 		userRepository.register(email.value, password.value)
 				.doOnSubscribe { isLoading.value = true }
 				.doFinally { isLoading.value = false }

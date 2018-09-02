@@ -38,12 +38,12 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 	}
 
 	override fun onLoginBtnClick() {
-		viewModel.signInWithEmailAndPassword()
+		viewModel.logInWithEmailAndPassword()
 	}
 
 
 	override fun onRegisterBtnClick() {
-		viewModel.createUserWithEmailAndPassword()
+		viewModel.registerWithEmailAndPassword()
 	}
 
 	private val onLoginSuccess = Observer<Boolean> {
