@@ -12,7 +12,6 @@ import pl.karolmichalski.shoppinglist.domain.user.UserRepository
 class UserRepositoryImpl(
 		private val firebaseAuth: FirebaseAuth) : UserRepository {
 
-
 	override fun login(email: String?, password: String?): Single<FirebaseUser> {
 		return when {
 			email.isNullOrBlank() -> Single.fromCallable { throw Exception("Enter email!") }
@@ -27,6 +26,10 @@ class UserRepositoryImpl(
 			password.isNullOrEmpty() -> Single.fromCallable { throw Exception("Enter Password!") }
 			else -> firebaseAuth.rxCreateUserWithEmailAndPassword(email!!, password!!)
 		}
+	}
+
+	override fun getCurrentUser(): FirebaseUser? {
+		return firebaseAuth.currentUser
 	}
 
 	override fun logout(): Completable {
