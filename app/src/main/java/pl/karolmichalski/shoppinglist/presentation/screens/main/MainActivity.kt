@@ -1,12 +1,12 @@
 package pl.karolmichalski.shoppinglist.presentation.screens.main
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.view.ActionMode
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding

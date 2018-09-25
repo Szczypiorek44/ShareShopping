@@ -1,8 +1,8 @@
 package pl.karolmichalski.shoppinglist.data.product.local
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
-import android.arch.persistence.room.OnConflictStrategy.REPLACE
+import androidx.lifecycle.LiveData
+import androidx.room.*
+import androidx.room.OnConflictStrategy.REPLACE
 import pl.karolmichalski.shoppinglist.data.models.Product
 
 @Dao

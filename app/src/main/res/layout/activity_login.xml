@@ -15,7 +15,7 @@
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusableInTouchMode="true">
@@ -61,6 +61,6 @@
             android:layout_height="match_parent"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

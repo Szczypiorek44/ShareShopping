@@ -1,7 +1,7 @@
 package pl.karolmichalski.shoppinglist.data.product
 
-import android.arch.persistence.room.Room
 import android.content.Context
+import androidx.room.Room
 import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides

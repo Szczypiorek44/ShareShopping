@@ -1,12 +1,12 @@
 package pl.karolmichalski.shoppinglist.presentation.screens.main.adapters
 
-import android.databinding.BindingAdapter
-import android.databinding.DataBindingUtil
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.presentation.screens.main.viewholders.ProductViewHolder
@@ -22,12 +22,12 @@ class ProductAdapter(private val onProductClick: (Product) -> Unit)
 	: ListAdapter<Product, ProductViewHolder>(ProductDiff()) {
 
 	class ProductDiff : DiffUtil.ItemCallback<Product>() {
-		override fun areItemsTheSame(oldItem: Product?, newItem: Product?): Boolean {
-			return oldItem?.key == newItem?.key
+		override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+			return oldItem.key == newItem.key
 		}
 
-		override fun areContentsTheSame(oldItem: Product?, newItem: Product?): Boolean {
-			return oldItem?.name == newItem?.name
+		override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+			return oldItem.name == newItem.name
 		}
 	}
 
@@ -41,12 +41,14 @@ class ProductAdapter(private val onProductClick: (Product) -> Unit)
 		this.recyclerView = recyclerView
 	}
 
-	override fun submitList(list: List<Product>) {
+	override fun submitList(list: List<Product>?) {
 		super.submitList(list)
-		if (list.size > itemCount)
-			recyclerView?.smoothScrollToPosition(list.size)
-		else if (list.size == itemCount)
-			notifyDataSetChanged()
+		list?.apply {
+			if (size > itemCount)
+				recyclerView?.smoothScrollToPosition(size)
+			else if (size == itemCount)
+				notifyDataSetChanged()
+		}
 	}
 
 	override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ProductViewHolder {

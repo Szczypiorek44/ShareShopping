@@ -4,14 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "pl.karolmichalski.shoppinglist"
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -34,17 +34,17 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.android.support:appcompat-v7:$support_lib_version"
-    implementation "com.android.support:design:$support_lib_version"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
 
-    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
+    implementation 'androidx.room:room-runtime:2.0.0-rc01'
+    kapt 'androidx.room:room-compiler:2.0.0-rc01'
 
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 
@@ -65,8 +65,8 @@ dependencies {
     implementation "com.google.firebase:firebase-database:$firebase_database_version"
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
 
     //dagger 2
     implementation "com.google.dagger:dagger:$dagger_version"

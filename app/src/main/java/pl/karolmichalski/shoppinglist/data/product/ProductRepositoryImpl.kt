@@ -1,7 +1,7 @@
 package pl.karolmichalski.shoppinglist.data.product
 
-import android.arch.lifecycle.LiveData
 import android.util.Log
+import androidx.lifecycle.LiveData
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy

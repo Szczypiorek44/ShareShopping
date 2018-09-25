@@ -1,9 +1,9 @@
 package pl.karolmichalski.shoppinglist.presentation.screens.login
 
 import android.app.Application
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import io.reactivex.rxkotlin.subscribeBy
 import pl.karolmichalski.shoppinglist.domain.user.UserRepository
 import pl.karolmichalski.shoppinglist.presentation.App

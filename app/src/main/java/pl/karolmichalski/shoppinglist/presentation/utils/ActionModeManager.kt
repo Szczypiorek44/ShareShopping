@@ -1,8 +1,8 @@
 package pl.karolmichalski.shoppinglist.presentation.utils
 
-import android.support.v7.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.view.ActionMode
 import pl.karolmichalski.shoppinglist.R
 
 class ActionModeManager(private val callback: Callback) {

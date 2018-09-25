@@ -1,7 +1,7 @@
 package pl.karolmichalski.shoppinglist.data.product.local
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import pl.karolmichalski.shoppinglist.data.models.Product
 
 @Database(entities = [(Product::class)], version = 2)

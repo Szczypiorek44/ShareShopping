@@ -1,6 +1,6 @@
 package pl.karolmichalski.shoppinglist.domain.product
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import pl.karolmichalski.shoppinglist.data.models.Product
 
 interface ProductRepository {
