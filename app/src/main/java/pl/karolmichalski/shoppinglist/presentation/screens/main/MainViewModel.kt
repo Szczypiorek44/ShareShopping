@@ -74,4 +74,8 @@ class MainViewModel(app: App) : ViewModel() {
 		productName.value = ""
 	}
 
+	fun logOut() {
+		 userRepository.logOut()
+	}
+
 }

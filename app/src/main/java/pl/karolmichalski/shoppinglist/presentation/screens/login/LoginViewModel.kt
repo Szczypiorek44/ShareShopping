@@ -33,7 +33,7 @@ class LoginViewModel(app: App) : ViewModel() {
 	}
 
 	fun logInWithEmailAndPassword() {
-		userRepository.login(email.value, password.value)
+		userRepository.logIn(email.value, password.value)
 				.doOnSubscribe { isLoading.value = true }
 				.doFinally { isLoading.value = false }
 				.subscribeBy(

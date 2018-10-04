@@ -18,12 +18,19 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 		ViewModelProviders.of(this, LoginViewModel.Factory(application)).get(LoginViewModel::class.java)
 	}
 
+	private val onLoginSuccess = Observer<Boolean> {
+		logIn()
+	}
+
+	private val showError = Observer<String> {
+		Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+	}
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		if (viewModel.isUserLogged()) {
-			MainActivity.start(this)
-			finish()
-		} else
+		if (viewModel.isUserLogged())
+			logIn()
+		else
 			init()
 	}
 
@@ -37,6 +44,11 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 		viewModel.errorMessage.observe(this@LoginActivity, showError)
 	}
 
+	private fun logIn() {
+		startActivity(Intent(this, MainActivity::class.java))
+		finish()
+	}
+
 	override fun onLoginBtnClick() {
 		viewModel.logInWithEmailAndPassword()
 	}
@@ -46,12 +58,4 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 		viewModel.registerWithEmailAndPassword()
 	}
 
-	private val onLoginSuccess = Observer<Boolean> {
-		startActivity(Intent(this, MainActivity::class.java))
-		finish()
-	}
-
-	private val showError = Observer<String> {
-		Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-	}
 }

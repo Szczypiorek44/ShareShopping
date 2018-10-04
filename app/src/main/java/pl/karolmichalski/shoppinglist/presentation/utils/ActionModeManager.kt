@@ -24,7 +24,7 @@ class ActionModeManager(private val callback: Callback) {
 
 	private val actionModeCallback = object : ActionMode.Callback {
 		override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-			mode?.menuInflater?.inflate(R.menu.menu, menu)
+			mode?.menuInflater?.inflate(R.menu.products_menu, menu)
 			isActive = true
 			return true
 		}
