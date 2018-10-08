@@ -13,11 +13,11 @@ import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
 import pl.karolmichalski.shoppinglist.presentation.screens.login.LoginActivity
 import pl.karolmichalski.shoppinglist.presentation.utils.ActionModeManager
-import pl.karolmichalski.shoppinglist.presentation.utils.addSelectedProducts
-import pl.karolmichalski.shoppinglist.presentation.utils.getSelectedProducts
-
+import pl.karolmichalski.shoppinglist.presentation.utils.BundleDelegate
 
 class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callback {
+
+	private var Bundle.selectedProducts by BundleDelegate.Set<String>("selected_products")
 
 	private val viewModel by lazy {
 		ViewModelProviders.of(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
@@ -53,12 +53,12 @@ class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callba
 
 	override fun onSaveInstanceState(outState: Bundle?) {
 		super.onSaveInstanceState(outState)
-		outState?.addSelectedProducts(viewModel.selectedProducts)
+		outState?.selectedProducts = viewModel.selectedProducts
 	}
 
 	override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
 		super.onRestoreInstanceState(savedInstanceState)
-		savedInstanceState?.getSelectedProducts()?.let {
+		savedInstanceState?.selectedProducts?.let {
 			viewModel.selectedProducts.addAll(it)
 		}
 	}
