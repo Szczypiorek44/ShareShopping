@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/white</item>
     </style>
 
+    <style name="Widget.Design.TextInputLayout.SimpleStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
