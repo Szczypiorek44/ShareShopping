@@ -1,16 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
+    <style name="AppTheme" parent="Theme.Design.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/indigo500</item>
-        <item name="colorPrimaryDark">@color/indigo700</item>
-        <item name="colorAccent">@color/white</item>
-    </style>
-
-    <style name="Widget.Design.TextInputLayout.SimpleStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/grey500</item>
+        <item name="colorAccent">@color/grey900</item>
+        <item name="android:windowBackground">@color/grey200</item>
+        <item name="buttonStyle">@style/Base.Widget.AppCompat.Button.Borderless</item>
     </style>
 
 </resources>
