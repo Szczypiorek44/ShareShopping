@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.shoppinglist.R
 import pl.karolmichalski.shoppinglist.data.models.Product
 import pl.karolmichalski.shoppinglist.databinding.ActivityMainBinding
+import pl.karolmichalski.shoppinglist.presentation.dialogs.DecisionDialog
 import pl.karolmichalski.shoppinglist.presentation.screens.login.LoginActivity
 import pl.karolmichalski.shoppinglist.presentation.utils.ActionModeManager
 import pl.karolmichalski.shoppinglist.presentation.utils.BundleDelegate
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callba
 
 	override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 		R.id.logout -> {
-			logout()
+			showLogoutDecisionDialog()
 			true
 		}
 		else -> super.onOptionsItemSelected(item)
@@ -89,6 +90,14 @@ class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callba
 	override fun onActionModeDestroyed() {
 		viewModel.deselectAllProducts()
 		viewModel.productList.value = viewModel.productList.value
+	}
+
+	private fun showLogoutDecisionDialog() {
+		val dialog = DecisionDialog()
+		dialog.title = getString(R.string.are_you_sure_you_want_to_log_out_question)
+		dialog.onButton1Click = { logout() }
+		dialog.onButton2Click = { dialog.dismiss() }
+		dialog.show(supportFragmentManager, dialog.javaClass.simpleName)
 	}
 
 	private fun logout() {

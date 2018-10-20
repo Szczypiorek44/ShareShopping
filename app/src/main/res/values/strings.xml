@@ -1,11 +1,18 @@
 <resources>
     <string name="app_name">ShoppingList</string>
-    <string name="delete">delete</string>
     <string name="log_in">Log in</string>
     <string name="log_out">Log out</string>
-    <string name="register">register</string>
+    <string name="register">Register</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
+
     <string name="add">Add</string>
+    <string name="delete">Delete</string>
+
     <string name="enter_product_name">Enter product name</string>
+
+    <string name="choose_what_you_want_to_do">Choose what you want to do</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="are_you_sure_you_want_to_log_out_question">Are you sure you want to log out?</string>
 </resources>

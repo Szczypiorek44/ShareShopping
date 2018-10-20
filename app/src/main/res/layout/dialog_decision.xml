@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="onButton1Click"
+            type="kotlin.jvm.functions.Function0" />
+
+        <variable
+            name="onButton2Click"
+            type="kotlin.jvm.functions.Function0" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="button1text"
+            type="String" />
+
+        <variable
+            name="button2text"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@{title ?? @string/choose_what_you_want_to_do}"
+            tools:text="@string/choose_what_you_want_to_do" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->onButton1Click.invoke()}"
+            android:text="@{button1text ?? @string/yes}"
+            app:layout_constraintEnd_toStartOf="@id/button2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTV"
+            tools:text="yes" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->onButton2Click.invoke()}"
+            android:text="@{button2text ?? @string/no}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button1"
+            app:layout_constraintTop_toTopOf="@id/button1"
+            tools:text="no" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
