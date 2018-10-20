@@ -17,7 +17,7 @@ import pl.karolmichalski.shoppinglist.presentation.utils.BundleDelegate
 
 class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callback {
 
-	private var Bundle.selectedProducts by BundleDelegate.Set<String>("selected_products")
+	private var Bundle.selectedProducts by BundleDelegate.HashSet<String>("selected_products")
 
 	private val viewModel by lazy {
 		ViewModelProviders.of(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
