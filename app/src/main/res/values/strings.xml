@@ -3,6 +3,7 @@
     <string name="log_in">Log in</string>
     <string name="log_out">Log out</string>
     <string name="register">Register</string>
+    <string name="login">Login</string>
     <string name="e_mail">E-mail</string>
     <string name="password">Password</string>
 

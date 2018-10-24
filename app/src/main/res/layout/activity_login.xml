@@ -39,7 +39,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/e_mail"
+                    android:hint="@string/login"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:text="@={viewModel.email}" />
@@ -71,19 +71,9 @@
                 android:layout_marginTop="20dp"
                 android:onClick="@{()->listener.onLoginBtnClick()}"
                 android:text="@string/log_in"
-                app:layout_constraintEnd_toStartOf="@id/registerBtn"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passwordLayout" />
-
-            <Button
-                android:id="@+id/registerBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:onClick="@{()->listener.onRegisterBtnClick()}"
-                android:text="@string/register"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/loginBtn"
-                app:layout_constraintTop_toTopOf="@id/loginBtn" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
