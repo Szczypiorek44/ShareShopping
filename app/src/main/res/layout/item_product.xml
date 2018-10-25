@@ -29,7 +29,7 @@
         android:paddingTop="5dp"
         android:text="@{product.name}"
         android:textSize="20sp"
-        tools:text="Mleko" />
+        tools:text="@sample/products" />
 
 </layout>
 
