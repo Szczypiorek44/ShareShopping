@@ -19,7 +19,7 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 	}
 
 	private val onLoginSuccess = Observer<Boolean> {
-		logIn()
+		showMainActivity()
 	}
 
 	private val showError = Observer<String> {
@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		if (viewModel.isUserLogged())
-			logIn()
+			showMainActivity()
 		else
 			init()
 	}
@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 		viewModel.errorMessage.observe(this@LoginActivity, showError)
 	}
 
-	private fun logIn() {
+	private fun showMainActivity() {
 		startActivity(Intent(this, MainActivity::class.java))
 		finish()
 	}

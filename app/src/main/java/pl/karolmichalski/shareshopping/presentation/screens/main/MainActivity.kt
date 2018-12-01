@@ -27,8 +27,7 @@ class MainActivity : AppCompatActivity(), MainListener, ActionModeManager.Callba
 	private val actionModeManager by lazy {
 		ActionModeManager(this)
 	}
-
-
+	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
