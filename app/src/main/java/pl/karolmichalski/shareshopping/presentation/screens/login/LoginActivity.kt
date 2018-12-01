@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.shareshopping.R
 import pl.karolmichalski.shareshopping.databinding.ActivityLoginBinding
 import pl.karolmichalski.shareshopping.presentation.screens.main.MainActivity
+import pl.karolmichalski.shareshopping.presentation.screens.register.RegisterActivity
 
 
 class LoginActivity : AppCompatActivity(), LoginListener {
@@ -50,12 +51,11 @@ class LoginActivity : AppCompatActivity(), LoginListener {
 	}
 
 	override fun onLoginBtnClick() {
-		viewModel.logInWithEmailAndPassword()
+		viewModel.logIn()
 	}
 
-
 	override fun onRegisterBtnClick() {
-		viewModel.registerWithEmailAndPassword()
+		startActivity(Intent(this, RegisterActivity::class.java))
 	}
 
 }

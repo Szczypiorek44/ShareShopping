@@ -7,7 +7,9 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import pl.karolmichalski.shareshopping.BuildConfig
-import pl.karolmichalski.shareshopping.data.ApiService
+import pl.karolmichalski.shareshopping.data.ApiInterface
+import pl.karolmichalski.shareshopping.data.ApiRepositoryImpl
+import pl.karolmichalski.shareshopping.domain.ApiRepository
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
@@ -20,7 +22,7 @@ class ApiModule {
 
 	@Provides
 	@Singleton
-	fun provideApiService(): ApiService {
+	fun provideApiService(): ApiInterface {
 		val loggingInterceptor = HttpLoggingInterceptor().apply {
 			level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 		}
@@ -39,6 +41,12 @@ class ApiModule {
 				.addConverterFactory(JacksonConverterFactory.create(objectMapper))
 				.build()
 
-		return retrofit.create(ApiService::class.java)
+		return retrofit.create(ApiInterface::class.java)
+	}
+
+	@Provides
+	@Singleton
+	fun provideApiRepository(apiInterface: ApiInterface): ApiRepository {
+		return ApiRepositoryImpl(apiInterface)
 	}
 }

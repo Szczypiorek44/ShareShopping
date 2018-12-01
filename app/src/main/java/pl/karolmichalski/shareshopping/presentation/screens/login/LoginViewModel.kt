@@ -4,8 +4,10 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
-import pl.karolmichalski.shareshopping.domain.user.UserRepository
+import io.reactivex.schedulers.Schedulers
+import pl.karolmichalski.shareshopping.domain.ApiRepository
 import pl.karolmichalski.shareshopping.presentation.App
 import javax.inject.Inject
 
@@ -18,7 +20,7 @@ class LoginViewModel(app: App) : ViewModel() {
 		}
 	}
 
-	val email = MutableLiveData<String>()
+	val login = MutableLiveData<String>()
 	val password = MutableLiveData<String>()
 	val isLoading = MutableLiveData<Boolean>().apply { value = false }
 
@@ -26,34 +28,26 @@ class LoginViewModel(app: App) : ViewModel() {
 	val errorMessage = MutableLiveData<String>()
 
 	@Inject
-	lateinit var userRepository: UserRepository
+	lateinit var apiRepository: ApiRepository
 
 	init {
 		app.appComponent.inject(this)
 	}
 
-	fun logInWithEmailAndPassword() {
-		userRepository.logIn(email.value, password.value)
-				.doOnSubscribe { isLoading.value = true }
-				.doFinally { isLoading.value = false }
-				.subscribeBy(
-						onSuccess = { loginSuccess.value = true },
-						onError = { errorMessage.value = it.localizedMessage }
-				)
-	}
-
-	fun registerWithEmailAndPassword() {
-		userRepository.register(email.value, password.value)
-				.doOnSubscribe { isLoading.value = true }
-				.doFinally { isLoading.value = false }
-				.subscribeBy(
-						onSuccess = { loginSuccess.value = true },
-						onError = { errorMessage.value = it.localizedMessage }
-				)
-	}
-
 	fun isUserLogged(): Boolean {
-		return userRepository.getCurrentUser() != null
+		return false
+	}
+
+	fun logIn() {
+		apiRepository.login("user1", "1234")
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSubscribe { isLoading.value = true }
+				.doFinally { isLoading.value = false }
+				.subscribeBy(
+						onSuccess = { loginSuccess.value = true },
+						onError = { errorMessage.value = it.localizedMessage }
+				)
 	}
 
 
