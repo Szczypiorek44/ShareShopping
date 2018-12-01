@@ -4,9 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import pl.karolmichalski.shareshopping.domain.user.UserRepository
 import pl.karolmichalski.shareshopping.presentation.App
-import javax.inject.Inject
 
 class RegisterViewModel(app: App) {
 
@@ -24,9 +22,6 @@ class RegisterViewModel(app: App) {
 
 	val loginSuccess = MutableLiveData<Boolean>()
 	val errorMessage = MutableLiveData<String>()
-
-	@Inject
-	lateinit var userRepository: UserRepository
 
 	init {
 		app.appComponent.inject(this)

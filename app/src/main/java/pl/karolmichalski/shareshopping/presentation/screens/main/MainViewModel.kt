@@ -1,12 +1,12 @@
 package pl.karolmichalski.shareshopping.presentation.screens.main
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import pl.karolmichalski.shareshopping.data.models.Product
-import pl.karolmichalski.shareshopping.domain.product.ProductRepository
-import pl.karolmichalski.shareshopping.domain.user.UserRepository
 import pl.karolmichalski.shareshopping.presentation.App
-import javax.inject.Inject
 
 class MainViewModel(app: App) : ViewModel() {
 
@@ -23,25 +23,19 @@ class MainViewModel(app: App) : ViewModel() {
 
 	val selectedProducts = HashSet<String>()
 
-	@Inject
-	lateinit var productRepository: ProductRepository
-
-	@Inject
-	lateinit var userRepository: UserRepository
-
 	init {
 		app.appComponent.inject(this)
 	}
 
 	fun getProducts(owner: LifecycleOwner) {
-		productRepository.getAll().observe(owner, Observer { savedProductList ->
-			savedProductList?.map { it.isChecked = selectedProducts.contains(it.key) }
-			productList.value = savedProductList
-		})
+//		productRepository.getAll().observe(owner, Observer { savedProductList ->
+//			savedProductList?.map { it.isChecked = selectedProducts.contains(it.key) }
+//			productList.value = savedProductList
+//		})
 	}
 
 	fun addProduct(name: String) {
-		productRepository.insert(name)
+//		productRepository.insert(name)
 	}
 
 	fun invalidateProductSelection(product: Product) {
@@ -53,12 +47,12 @@ class MainViewModel(app: App) : ViewModel() {
 	}
 
 	fun removeCheckedProducts() {
-		productList.value?.forEach { product ->
-			if (selectedProducts.contains(product.key)) {
-				productRepository.delete(product)
-				selectedProducts.remove(product.key)
-			}
-		}
+//		productList.value?.forEach { product ->
+//			if (selectedProducts.contains(product.key)) {
+//				productRepository.delete(product)
+//				selectedProducts.remove(product.key)
+//			}
+//		}
 	}
 
 	fun deselectAllProducts() {
@@ -75,7 +69,7 @@ class MainViewModel(app: App) : ViewModel() {
 	}
 
 	fun logOut() {
-		 userRepository.logOut()
+
 	}
 
 }

@@ -12,13 +12,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
     }
     buildTypes {
         release {
@@ -48,30 +41,9 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
-    //multidex
-    implementation 'com.android.support:multidex:1.0.3'
-
-    //room
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-
     //reactiveX
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
-
-    //required dependency: firebase-core
-    implementation "com.androidhuman.rxfirebase2:firebase-core:$firebase_core_version.0"
-    implementation "com.google.firebase:firebase-core:$firebase_core_version"
-
-    //firebase-auth
-    implementation "com.androidhuman.rxfirebase2:firebase-auth-kotlin:$firebase_auth_version.0"
-    implementation "com.androidhuman.rxfirebase2:firebase-auth:$firebase_auth_version.0"
-    implementation "com.google.firebase:firebase-auth:$firebase_auth_version"
-
-    //firebase-database
-    implementation "com.androidhuman.rxfirebase2:firebase-database-kotlin:$firebase_database_version.2"
-    implementation "com.androidhuman.rxfirebase2:firebase-database:$firebase_database_version.0"
-    implementation "com.google.firebase:firebase-database:$firebase_database_version"
 
     //dagger 2
     implementation "com.google.dagger:dagger:$dagger_version"

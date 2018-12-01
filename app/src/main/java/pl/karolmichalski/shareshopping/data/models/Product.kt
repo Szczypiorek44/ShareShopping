@@ -1,17 +1,10 @@
 package pl.karolmichalski.shareshopping.data.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "products")
-class Product(@ColumnInfo(name = "key") val key: String,
-			  @ColumnInfo(name = "name") val name: String,
-			  @ColumnInfo(name = "status") var status: Int) {
-	@PrimaryKey(autoGenerate = true)
+class Product(val key: String,
+			  val name: String,
+			  var status: Int) {
 	var id: Int = 0
-	@Ignore
 	var isChecked: Boolean = false
 
 	class Status {
