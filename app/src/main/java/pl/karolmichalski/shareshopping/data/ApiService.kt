@@ -6,7 +6,15 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-	@GET("/search/repositories")
-	fun findRepos(@Query("q") keyword: String): Single<String>
+	@GET("register")
+	fun register(@Query("login") login: String,
+				 @Query("email") email: String,
+				 @Query("password") password: String)
+			: Single<String>
+
+	@GET("login")
+	fun login(@Query("login") login: String,
+			  @Query("password") password: String)
+			: Single<String>
 
 }
