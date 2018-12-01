@@ -11,7 +11,7 @@ class ApiRepositoryImpl(private val apiInterface: ApiInterface) : ApiRepository 
 			login.isNullOrBlank() -> Single.error(BlankInputException("Enter Login!"))
 			email.isNullOrBlank() -> Single.error(BlankInputException("Enter Email!"))
 			password.isNullOrEmpty() -> Single.error(BlankInputException("Enter Password!"))
-			else -> apiInterface.register(login!!, email!!, password!!)
+			else -> apiInterface.register(login, email, password)
 		}
 	}
 
@@ -19,7 +19,7 @@ class ApiRepositoryImpl(private val apiInterface: ApiInterface) : ApiRepository 
 		return when {
 			login.isNullOrBlank() -> Single.error(BlankInputException("Enter Login!"))
 			password.isNullOrEmpty() -> Single.error(BlankInputException("Enter Password!"))
-			else -> apiInterface.login(login!!, password!!)
+			else -> apiInterface.login(login, password)
 		}
 	}
 }
