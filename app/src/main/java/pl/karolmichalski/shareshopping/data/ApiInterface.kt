@@ -10,7 +10,7 @@ interface ApiInterface {
 	fun register(@Query("login") login: String,
 				 @Query("email") email: String,
 				 @Query("password") password: String)
-			: Single<String>
+			: Single<Boolean>
 
 	@GET("login")
 	fun login(@Query("login") login: String,

@@ -6,8 +6,9 @@ interface ApiRepository {
 
 	fun register(login: String?,
 				 email: String?,
-				 password: String?)
-			: Single<String>
+				 password: String?,
+				 repeatPassword: String?)
+			: Single<Boolean>
 
 	fun login(login: String?,
 			  password: String?)
