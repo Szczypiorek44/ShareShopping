@@ -1,7 +1,6 @@
 package pl.karolmichalski.shareshopping.presentation.screens.login
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -40,13 +39,13 @@ class LoginViewModel(app: App) : ViewModel() {
 	}
 
 	fun logIn() {
-		apiRepository.login("user1", "1234")
+		apiRepository.login(login.value, password.value)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.doOnSubscribe { isLoading.value = true }
 				.doFinally { isLoading.value = false }
 				.subscribeBy(
-						onSuccess = { Log.d("awdaw", "awdawdwa") },
+						onSuccess = { loginSuccess.value = true },
 						onError = { errorMessage.value = it.localizedMessage }
 				)
 	}

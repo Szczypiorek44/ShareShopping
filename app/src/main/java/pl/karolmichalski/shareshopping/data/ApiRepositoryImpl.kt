@@ -25,8 +25,7 @@ class ApiRepositoryImpl(private val context: Context,
 			password.isNullOrEmpty() -> Single.error(BlankInputException("Enter Password!"))
 			else -> apiInterface.login(login, password).map { guid ->
 				if (guid.isValidGuid()) {
-					sharedPrefs.saveGuid(guid)
-					guid
+					guid.also { sharedPrefs.saveGuid(guid) }
 				} else {
 					error(context.getString(R.string.invalid_login_or_password))
 				}
