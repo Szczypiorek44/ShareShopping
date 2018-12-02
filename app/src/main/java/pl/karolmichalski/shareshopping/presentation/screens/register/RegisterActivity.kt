@@ -29,12 +29,18 @@ class RegisterActivity : AppCompatActivity(), RegisterListener {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		supportActionBar?.setDisplayHomeAsUpEnabled(true)
 		DataBindingUtil.setContentView<ActivityRegisterBinding>(this, R.layout.activity_register).also {
 			it.setLifecycleOwner(this)
 			it.listener = this
 			it.viewModel = viewModel
 		}
 		viewModel.errorMessage.observe(this, showError)
+	}
+
+	override fun onSupportNavigateUp(): Boolean {
+		finish()
+		return true
 	}
 
 	override fun onRegisterBtnClick() {
