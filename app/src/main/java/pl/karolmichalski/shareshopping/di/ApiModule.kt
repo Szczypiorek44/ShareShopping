@@ -1,5 +1,6 @@
 package pl.karolmichalski.shareshopping.di
 
+import android.content.Context
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import dagger.Module
@@ -9,6 +10,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import pl.karolmichalski.shareshopping.BuildConfig
 import pl.karolmichalski.shareshopping.data.ApiInterface
 import pl.karolmichalski.shareshopping.data.ApiRepositoryImpl
+import pl.karolmichalski.shareshopping.data.SharedPrefs
+import pl.karolmichalski.shareshopping.data.SharedPrefsImpl
 import pl.karolmichalski.shareshopping.domain.ApiRepository
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -18,7 +21,7 @@ import javax.inject.Singleton
 private const val API_URL = "http://shoppingapipz.azurewebsites.net/ShoppingAPI.svc/JsonShoppingAPI/"
 
 @Module
-class ApiModule {
+class ApiModule(private val context: Context) {
 
 	@Provides
 	@Singleton
@@ -46,7 +49,10 @@ class ApiModule {
 
 	@Provides
 	@Singleton
-	fun provideApiRepository(apiInterface: ApiInterface): ApiRepository {
-		return ApiRepositoryImpl(apiInterface)
-	}
+	fun provideSharedPrefs(): SharedPrefs = SharedPrefsImpl(context)
+
+	@Provides
+	@Singleton
+	fun provideApiRepository(apiInterface: ApiInterface, sharedPrefs: SharedPrefs): ApiRepository = ApiRepositoryImpl(context, apiInterface, sharedPrefs)
+
 }

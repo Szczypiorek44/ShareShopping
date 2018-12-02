@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="pl.karolmichalski.shareshopping">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="pl.karolmichalski.shareshopping.presentation.App"
         android:allowBackup="true"

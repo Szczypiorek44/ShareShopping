@@ -1,6 +1,7 @@
 package pl.karolmichalski.shareshopping.presentation.screens.login
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -45,7 +46,7 @@ class LoginViewModel(app: App) : ViewModel() {
 				.doOnSubscribe { isLoading.value = true }
 				.doFinally { isLoading.value = false }
 				.subscribeBy(
-						onSuccess = { loginSuccess.value = true },
+						onSuccess = { Log.d("awdaw", "awdawdwa") },
 						onError = { errorMessage.value = it.localizedMessage }
 				)
 	}
