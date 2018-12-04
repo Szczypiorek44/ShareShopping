@@ -19,13 +19,17 @@ class MainActivity : AppCompatActivity(), MainListener {
 	private val viewModel by lazy {
 		ViewModelProviders.of(this).get(MainViewModel::class.java)
 	}
-	
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
 			setLifecycleOwner(this@MainActivity)
 			viewModel = this@MainActivity.viewModel
 			listener = this@MainActivity
+		}
+		supportActionBar?.apply {
+			setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24px)
+			setDisplayHomeAsUpEnabled(true)
 		}
 	}
 
@@ -37,6 +41,10 @@ class MainActivity : AppCompatActivity(), MainListener {
 	override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 		R.id.logout -> {
 			showLogoutDecisionDialog()
+			true
+		}
+		android.R.id.home -> {
+			viewModel.drawerOpened.value = viewModel.drawerOpened.value?.not()
 			true
 		}
 		else -> super.onOptionsItemSelected(item)
