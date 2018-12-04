@@ -24,6 +24,7 @@ class ProductListsFragment : Fragment() {
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		activity?.title = getString(R.string.shopping_lists)
 		viewModel.getProductLists()
 	}
 

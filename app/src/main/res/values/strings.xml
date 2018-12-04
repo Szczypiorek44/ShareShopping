@@ -22,6 +22,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <string name="shopping_lists">Shopping lists</string>
+
     <!--errors-->
     <string name="invalid_login_or_password">Invalid login or password</string>
 
