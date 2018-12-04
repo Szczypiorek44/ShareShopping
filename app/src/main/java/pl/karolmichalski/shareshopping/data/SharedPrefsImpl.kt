@@ -7,9 +7,9 @@ class SharedPrefsImpl(context: Context) : SharedPrefs {
 
 	private val sharedPreferences = context.getSharedPreferences(context.getString(R.string.sharedpreferences_file_key), Context.MODE_PRIVATE)
 
-	override fun saveGuid(guid: String) {
+	override fun saveUid(uid: String) {
 		sharedPreferences.edit().apply {
-			putString("awdwa", guid)
+			putString("awdwa", uid)
 			apply()
 		}
 	}

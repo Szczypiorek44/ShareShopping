@@ -25,9 +25,9 @@ class ApiRepositoryImpl(private val context: Context,
 		return when {
 			login.isNullOrBlank() -> Single.error(BlankInputException("Enter login!"))
 			password.isNullOrEmpty() -> Single.error(BlankInputException("Enter password!"))
-			else -> apiInterface.login(login, password).map { guid ->
-				if (guid.isValidGuid()) {
-					guid.also { sharedPrefs.saveGuid(guid) }
+			else -> apiInterface.login(login, password).map { uid ->
+				if (uid.isValidUid()) {
+					uid.also { sharedPrefs.saveUid(uid) }
 				} else {
 					error(context.getString(R.string.invalid_login_or_password))
 				}
@@ -35,7 +35,7 @@ class ApiRepositoryImpl(private val context: Context,
 		}
 	}
 
-	private fun String.isValidGuid(): Boolean {
+	private fun String.isValidUid(): Boolean {
 		return this != "00000000-0000-0000-0000-000000000000"
 	}
 }
