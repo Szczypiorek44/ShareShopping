@@ -15,6 +15,6 @@ interface ApiRepository {
 			  password: String?)
 			: Single<String>
 
-	fun getUserLists(uid: String?): Single<List<ProductList>>
+	fun getProductLists(): Single<List<ProductList>>
 
 }

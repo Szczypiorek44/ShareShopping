@@ -13,4 +13,8 @@ class SharedPrefsImpl(context: Context) : SharedPrefs {
 			apply()
 		}
 	}
+
+	override fun getUid(): String {
+		return sharedPreferences.getString("uid", "") ?: ""
+	}
 }

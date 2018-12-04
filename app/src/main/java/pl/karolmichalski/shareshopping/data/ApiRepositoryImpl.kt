@@ -36,8 +36,9 @@ class ApiRepositoryImpl(private val context: Context,
 		}
 	}
 
-	override fun getUserLists(uid: String?): Single<List<ProductList>> {
-		return if (uid.isNullOrBlank())
+	override fun getProductLists(): Single<List<ProductList>> {
+		val uid = sharedPrefs.getUid()
+		return if (uid.isBlank())
 			Single.error(BlankInputException("Uid is empty"))
 		else
 			apiInterface.getUserLists(uid)
