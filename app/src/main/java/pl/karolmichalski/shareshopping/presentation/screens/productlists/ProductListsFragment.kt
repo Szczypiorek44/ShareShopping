@@ -23,4 +23,8 @@ class ProductListsFragment : Fragment() {
 		}.root
 	}
 
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		viewModel.getProductLists()
+	}
+
 }

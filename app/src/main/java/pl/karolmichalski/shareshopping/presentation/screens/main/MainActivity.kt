@@ -6,16 +6,15 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.shareshopping.R
 import pl.karolmichalski.shareshopping.databinding.ActivityMainBinding
 import pl.karolmichalski.shareshopping.presentation.dialogs.DecisionDialog
 import pl.karolmichalski.shareshopping.presentation.screens.login.LoginActivity
-import pl.karolmichalski.shareshopping.presentation.utils.BundleDelegate
+import pl.karolmichalski.shareshopping.presentation.screens.productlists.ProductListsFragment
 
 class MainActivity : AppCompatActivity(), MainListener {
-
-	private var Bundle.selectedProducts by BundleDelegate.HashSet<String>("selected_products")
 
 	private val viewModel by lazy {
 		ViewModelProviders.of(this).get(MainViewModel::class.java)
@@ -44,7 +43,8 @@ class MainActivity : AppCompatActivity(), MainListener {
 	}
 
 	override fun on1Click() {
-
+		viewModel.drawerOpened.value = false
+		showFragment(ProductListsFragment())
 	}
 
 	private fun showLogoutDecisionDialog() {
@@ -55,9 +55,18 @@ class MainActivity : AppCompatActivity(), MainListener {
 		dialog.show(supportFragmentManager, dialog.javaClass.simpleName)
 	}
 
+	private fun showFragment(fragment: Fragment) {
+		val fragmentTransaction = supportFragmentManager.beginTransaction()
+		fragmentTransaction
+				.replace(R.id.fragmentContainer, fragment)
+				.commit()
+	}
+
 	private fun logout() {
 		viewModel.logOut()
 		startActivity(Intent(this, LoginActivity::class.java))
 		finish()
 	}
+
+
 }
