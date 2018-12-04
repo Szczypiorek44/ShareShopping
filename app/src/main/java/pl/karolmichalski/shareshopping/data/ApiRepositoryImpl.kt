@@ -4,6 +4,7 @@ import android.content.Context
 import io.reactivex.Single
 import pl.karolmichalski.shareshopping.R
 import pl.karolmichalski.shareshopping.data.exceptions.BlankInputException
+import pl.karolmichalski.shareshopping.data.models.ProductList
 import pl.karolmichalski.shareshopping.domain.ApiRepository
 
 class ApiRepositoryImpl(private val context: Context,
@@ -33,6 +34,13 @@ class ApiRepositoryImpl(private val context: Context,
 				}
 			}
 		}
+	}
+
+	override fun getUserLists(uid: String?): Single<List<ProductList>> {
+		return if (uid.isNullOrBlank())
+			Single.error(BlankInputException("Uid is empty"))
+		else
+			apiInterface.getUserLists(uid)
 	}
 
 	private fun String.isValidUid(): Boolean {

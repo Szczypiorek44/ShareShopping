@@ -9,7 +9,7 @@ class SharedPrefsImpl(context: Context) : SharedPrefs {
 
 	override fun saveUid(uid: String) {
 		sharedPreferences.edit().apply {
-			putString("awdwa", uid)
+			putString("uid", uid)
 			apply()
 		}
 	}
