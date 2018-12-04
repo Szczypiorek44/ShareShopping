@@ -21,7 +21,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->listener.on1Click()}"
+                android:onClick="@{()->listener.onShoppingListsClick()}"
                 android:text="@string/shopping_lists" />
 
             <Button

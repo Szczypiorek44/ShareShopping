@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), MainListener {
 		else -> super.onOptionsItemSelected(item)
 	}
 
-	override fun on1Click() {
+	override fun onShoppingListsClick() {
 		viewModel.drawerOpened.value = false
 		showFragment(ProductListsFragment())
 	}
