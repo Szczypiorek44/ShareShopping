@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="Autofill">
 
     <data>
+
+        <variable
+            name="listener"
+            type="pl.karolmichalski.shareshopping.presentation.screens.productlists.ProductListsListener" />
 
         <variable
             name="viewModel"
@@ -15,6 +20,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:onItemClick="@{listener.onItemClick()}"
+            app:productLists="@{viewModel.productLists}"
+            tools:listitem="@layout/item_productlist" />
 
     </LinearLayout>
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import pl.karolmichalski.shareshopping.data.models.ProductList
 import pl.karolmichalski.shareshopping.domain.ApiRepository
 import pl.karolmichalski.shareshopping.presentation.App
 import javax.inject.Inject
@@ -20,6 +21,8 @@ class ProductListsViewModel(app: App) : ViewModel() {
 		}
 	}
 
+	val productLists = MutableLiveData<List<ProductList>>().apply { value = ArrayList() }
+
 	val isLoading = MutableLiveData<Boolean>().apply { value = false }
 	val errorMessage = MutableLiveData<String>()
 
@@ -30,7 +33,7 @@ class ProductListsViewModel(app: App) : ViewModel() {
 		app.appComponent.inject(this)
 	}
 
-	fun getProductLists(){
+	fun getProductLists() {
 		apiRepository.getProductLists()
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
@@ -38,6 +41,7 @@ class ProductListsViewModel(app: App) : ViewModel() {
 				.doFinally { isLoading.value = false }
 				.subscribeBy(
 						onSuccess = {
+							productLists.value = it
 
 						},
 						onError = { errorMessage.value = it.localizedMessage }
