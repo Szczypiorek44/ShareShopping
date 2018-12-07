@@ -28,8 +28,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:onProductClick="@{listener.onProductClick()}"
             app:productList="@{viewModel.productList}"
-            app:reverseLayout="true"
-            app:stackFromEnd="true"
             tools:listitem="@layout/item_product" />
 
         <LinearLayout

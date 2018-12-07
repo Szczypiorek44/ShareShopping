@@ -39,22 +39,20 @@ class ProductListDetailsViewModel(app: App) : ViewModel() {
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeBy(
-						onSuccess = {
-							Log.d("awdaw", "wadawdw")
-							productList.value = it.toMutableList()
-						},
-						onError = {
-							Log.d("awdaw222", "wadawdw2222222")
-							errorMessage.value = it.localizedMessage }
+						onSuccess = { productList.value = it.toMutableList() },
+						onError = { errorMessage.value = it.localizedMessage }
 				)
 	}
 
-	fun addProduct(listId: String){
+	fun addProduct(listId: String) {
 		apiRepository.addProductToList(productName.value, listId)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribeBy(
-						onSuccess = { getProducts(listId) },
+						onSuccess = {
+							productName.value = ""
+							getProducts(listId)
+						},
 						onError = { errorMessage.value = it.localizedMessage }
 				)
 
