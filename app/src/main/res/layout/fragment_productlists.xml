@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="listener"
             type="pl.karolmichalski.shareshopping.presentation.screens.productlists.ProductListsListener" />
@@ -16,11 +18,13 @@
 
     </data>
 
-    <LinearLayout
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -28,6 +32,15 @@
             app:productLists="@{viewModel.productLists}"
             tools:listitem="@layout/item_productlist" />
 
-    </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:layout_anchor="@id/recyclerView"
+            android:onClick="@{(view) -> listener.onAddClick(view)}"
+            app:layout_anchorGravity="bottom|end"
+            app:layout_behavior="pl.karolmichalski.shareshopping.presentation.utils.ScrollAwareFABBehavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

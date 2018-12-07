@@ -37,4 +37,8 @@ class ProductListsFragment : Fragment(), ProductListsListener {
 		}
 	}
 
+	override fun onAddClick(view: View) {
+		Toast.makeText(context,"XDAWDWADAW", Toast.LENGTH_SHORT).show()
+	}
+
 }
