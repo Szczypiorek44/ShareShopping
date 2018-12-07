@@ -26,6 +26,8 @@
 
         <activity android:name="pl.karolmichalski.shareshopping.presentation.screens.register.RegisterActivity" />
 
+        <activity android:name=".presentation.screens.productlistdetails.ProductListDetailsActivity" />
+
     </application>
 
 </manifest>
