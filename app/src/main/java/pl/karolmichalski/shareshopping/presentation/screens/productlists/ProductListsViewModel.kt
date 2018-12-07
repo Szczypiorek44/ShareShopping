@@ -40,14 +40,7 @@ class ProductListsViewModel(app: App) : ViewModel() {
 				.doOnSubscribe { isLoading.value = true }
 				.doFinally { isLoading.value = false }
 				.subscribeBy(
-						onSuccess = {
-							val list = ArrayList<ProductList>()
-							for (i in 1..20){
-								list.add(ProductList(i.toString(), "XDDDD"))
-							}
-							productLists.value = list
-
-						},
+						onSuccess = { productLists.value = it },
 						onError = { errorMessage.value = it.localizedMessage }
 				)
 	}

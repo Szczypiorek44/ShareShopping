@@ -1,6 +1,7 @@
 package pl.karolmichalski.shareshopping.data
 
 import io.reactivex.Single
+import pl.karolmichalski.shareshopping.data.models.Product
 import pl.karolmichalski.shareshopping.data.models.ProductList
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -22,4 +23,12 @@ interface ApiInterface {
 	fun getUserLists(@Query("userId") uid: String)
 			: Single<List<ProductList>>
 
+	@GET("getProductsFromList")
+	fun getProductsFromList(@Query("listId") listId: String)
+			: Single<List<Product>>
+
+	@GET("addProductToList")
+	fun addProductToList(@Query("productName") productName: String,
+						 @Query("listId") listId: String)
+			: Single<Boolean>
 }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.shareshopping.R
 import pl.karolmichalski.shareshopping.data.models.ProductList
 import pl.karolmichalski.shareshopping.databinding.FragmentProductlistsBinding
+import pl.karolmichalski.shareshopping.presentation.screens.productlistdetails.ProductListDetailsActivity
 
 class ProductListsFragment : Fragment(), ProductListsListener {
 
@@ -33,7 +34,8 @@ class ProductListsFragment : Fragment(), ProductListsListener {
 
 	override fun onItemClick(): (ProductList) -> Unit {
 		return {
-			Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
+			val intent = ProductListDetailsActivity.getIntent(context, it.id)
+			startActivityForResult(intent, 200)
 		}
 	}
 

@@ -1,4 +1,4 @@
-package pl.karolmichalski.shareshopping.presentation.screens.main.viewholders
+package pl.karolmichalski.shareshopping.presentation.screens.productlistdetails.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +9,6 @@ class ProductViewHolder(private val binding: ItemProductBinding,
 						private val onProductClick: (Product) -> Unit)
 	: RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-
 	init {
 		binding.listener = this
 	}
@@ -18,11 +17,9 @@ class ProductViewHolder(private val binding: ItemProductBinding,
 		binding.product?.apply {
 			onProductClick(this)
 		}
-		binding.invalidateAll()
 	}
 
 	fun bind(product: Product) {
 		binding.product = product
 	}
-
 }

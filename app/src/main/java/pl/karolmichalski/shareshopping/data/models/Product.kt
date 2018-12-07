@@ -1,17 +1,16 @@
 package pl.karolmichalski.shareshopping.data.models
 
+import com.fasterxml.jackson.annotation.JsonProperty
 
-class Product(val key: String,
-			  val name: String,
-			  var status: Int) {
-	var id: Int = 0
+
+class Product(@JsonProperty("IsBought")
+			  val isBought: Boolean,
+			  @JsonProperty("ListId")
+			  val listId: String,
+			  @JsonProperty("ProductId")
+			  val id: String,
+			  @JsonProperty("ProductName")
+			  val name: String) {
+
 	var isChecked: Boolean = false
-
-	class Status {
-		companion object {
-			const val ADDED = 0
-			const val SYNCED = 1
-			const val DELETED = 2
-		}
-	}
 }
