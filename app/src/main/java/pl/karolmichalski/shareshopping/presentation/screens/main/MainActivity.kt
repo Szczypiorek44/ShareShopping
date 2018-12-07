@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), MainListener {
 			setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24px)
 			setDisplayHomeAsUpEnabled(true)
 		}
+		showFragment(ProductListsFragment())
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -50,8 +51,16 @@ class MainActivity : AppCompatActivity(), MainListener {
 		else -> super.onOptionsItemSelected(item)
 	}
 
+	override fun onBackPressed() {
+		if (viewModel.drawerOpened.value == true)
+			viewModel.drawerOpened.value = false
+		else
+			super.onBackPressed()
+	}
+
 	override fun onShoppingListsClick() {
 		viewModel.drawerOpened.value = false
+
 		showFragment(ProductListsFragment())
 	}
 
