@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.shareshopping.R
 import pl.karolmichalski.shareshopping.data.models.ProductList
 import pl.karolmichalski.shareshopping.databinding.FragmentProductlistsBinding
+import pl.karolmichalski.shareshopping.presentation.dialogs.ListCreationDialog
 import pl.karolmichalski.shareshopping.presentation.screens.productlistdetails.ProductListDetailsActivity
 
 class ProductListsFragment : Fragment(), ProductListsListener {
@@ -40,7 +40,13 @@ class ProductListsFragment : Fragment(), ProductListsListener {
 	}
 
 	override fun onAddClick(view: View) {
-		Toast.makeText(context,"XDAWDWADAW", Toast.LENGTH_SHORT).show()
+		showLogoutDecisionDialog()
 	}
+
+	private fun showLogoutDecisionDialog() {
+		ListCreationDialog()
+				.show(childFragmentManager, ListCreationDialog::javaClass.name)
+	}
+
 
 }
