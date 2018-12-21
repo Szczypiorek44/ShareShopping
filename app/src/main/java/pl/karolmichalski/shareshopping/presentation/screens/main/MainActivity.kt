@@ -17,7 +17,7 @@ import pl.karolmichalski.shareshopping.presentation.screens.productlists.Product
 class MainActivity : AppCompatActivity(), MainListener {
 
 	private val viewModel by lazy {
-		ViewModelProviders.of(this).get(MainViewModel::class.java)
+		ViewModelProviders.of(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
