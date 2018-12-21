@@ -36,10 +36,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            app:layout_anchor="@id/recyclerView"
             android:onClick="@{(view) -> listener.onAddClick(view)}"
+            app:layout_anchor="@id/recyclerView"
             app:layout_anchorGravity="bottom|end"
-            app:layout_behavior="pl.karolmichalski.shareshopping.presentation.utils.ScrollAwareFABBehavior" />
+            app:layout_behavior="pl.karolmichalski.shareshopping.presentation.utils.ScrollAwareFABBehavior"
+            app:srcCompat="@drawable/ic_add_24px" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
