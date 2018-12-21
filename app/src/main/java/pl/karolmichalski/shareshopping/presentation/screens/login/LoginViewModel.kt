@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import pl.karolmichalski.shareshopping.data.SharedPrefs
 import pl.karolmichalski.shareshopping.domain.ApiRepository
 import pl.karolmichalski.shareshopping.presentation.App
 import javax.inject.Inject
@@ -30,12 +31,15 @@ class LoginViewModel(app: App) : ViewModel() {
 	@Inject
 	lateinit var apiRepository: ApiRepository
 
+	@Inject
+	lateinit var sharedPrefs: SharedPrefs
+
 	init {
 		app.appComponent.inject(this)
 	}
 
 	fun isUserLogged(): Boolean {
-		return false
+		return sharedPrefs.getUid().isNotEmpty()
 	}
 
 	fun logIn() {
