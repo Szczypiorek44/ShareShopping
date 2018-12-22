@@ -31,4 +31,9 @@ interface ApiInterface {
 	fun addProductToList(@Query("productName") productName: String,
 						 @Query("listId") listId: String)
 			: Single<Boolean>
+
+	@GET("createNewList")
+	fun createNewList(@Query("userId") uid: String,
+					  @Query("listName") listName: String)
+			: Single<Boolean>
 }

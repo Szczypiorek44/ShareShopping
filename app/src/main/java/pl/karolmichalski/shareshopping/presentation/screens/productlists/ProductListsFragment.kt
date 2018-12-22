@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.shareshopping.R
 import pl.karolmichalski.shareshopping.data.models.ProductList
@@ -20,6 +21,10 @@ class ProductListsFragment : Fragment(), ProductListsListener {
 		ViewModelProviders.of(this, ProductListsViewModel.Factory(activity)).get(ProductListsViewModel::class.java)
 	}
 
+	private val showError = Observer<String> {
+		Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+	}
+
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		return DataBindingUtil.inflate<FragmentProductlistsBinding>(inflater, R.layout.fragment_productlists, container, false).also {
 			it.setLifecycleOwner(this)
@@ -29,6 +34,7 @@ class ProductListsFragment : Fragment(), ProductListsListener {
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		viewModel.errorMessage.observe(this, showError)
 		activity?.title = getString(R.string.shopping_lists)
 		viewModel.getProductLists()
 	}
@@ -46,13 +52,11 @@ class ProductListsFragment : Fragment(), ProductListsListener {
 
 	private fun showLogoutDecisionDialog() {
 		ListCreationDialog().apply {
-			onAcceptClick = {
-				Toast.makeText(this@ProductListsFragment.context, it, Toast.LENGTH_SHORT).show()
+			onAcceptClick = { listName ->
+				viewModel.createList(listName)
 				dismiss()
 			}
 		}.show(childFragmentManager, ListCreationDialog::javaClass.name)
 
 	}
-
-
 }

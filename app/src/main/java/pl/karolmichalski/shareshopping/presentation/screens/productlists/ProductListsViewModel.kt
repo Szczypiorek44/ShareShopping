@@ -45,4 +45,16 @@ class ProductListsViewModel(app: App) : ViewModel() {
 				)
 	}
 
+	fun createList(listName: String?) {
+		apiRepository.createNewList(listName)
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSubscribe { isLoading.value = true }
+				.doFinally { isLoading.value = false }
+				.subscribeBy(
+						onSuccess = { getProductLists() },
+						onError = { errorMessage.value = it.localizedMessage }
+				)
+	}
+
 }
