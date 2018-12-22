@@ -19,7 +19,9 @@ class ListCreationDialog : DialogFragment() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 		return DataBindingUtil.inflate<DialogListcreationBinding>(inflater, R.layout.dialog_listcreation, container, false).also {
 			it.setLifecycleOwner(this)
-			it.onAcceptClick = onAcceptClick
+			it.onAcceptClick = {
+				listName.value?.let { name -> onAcceptClick(name) }
+			}
 			it.listName = listName
 		}.root
 	}

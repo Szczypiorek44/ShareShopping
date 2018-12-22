@@ -6,7 +6,7 @@
 
         <variable
             name="onAcceptClick"
-            type="kotlin.jvm.functions.Function0&lt;String>" />
+            type="kotlin.jvm.functions.Function0" />
 
         <variable
             name="listName"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -44,8 +45,13 @@ class ProductListsFragment : Fragment(), ProductListsListener {
 	}
 
 	private fun showLogoutDecisionDialog() {
-		ListCreationDialog()
-				.show(childFragmentManager, ListCreationDialog::javaClass.name)
+		ListCreationDialog().apply {
+			onAcceptClick = {
+				Toast.makeText(this@ProductListsFragment.context, it, Toast.LENGTH_SHORT).show()
+				dismiss()
+			}
+		}.show(childFragmentManager, ListCreationDialog::javaClass.name)
+
 	}
 
 
