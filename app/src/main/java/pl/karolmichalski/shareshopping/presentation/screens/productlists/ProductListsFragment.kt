@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import pl.karolmichalski.shareshopping.R
 import pl.karolmichalski.shareshopping.data.models.ProductList
 import pl.karolmichalski.shareshopping.databinding.FragmentProductlistsBinding
+import pl.karolmichalski.shareshopping.presentation.dialogs.DecisionDialog
 import pl.karolmichalski.shareshopping.presentation.dialogs.ListCreationDialog
 import pl.karolmichalski.shareshopping.presentation.screens.productlistdetails.ProductListDetailsActivity
 
@@ -42,21 +43,35 @@ class ProductListsFragment : Fragment(), ProductListsListener {
 	override fun onItemClick(): (ProductList) -> Unit {
 		return {
 			val intent = ProductListDetailsActivity.getIntent(context, it.id)
-			startActivityForResult(intent, 200)
+			startActivity(intent)
 		}
 	}
 
-	override fun onAddClick(view: View) {
-		showLogoutDecisionDialog()
+	override fun onItemLongClick(): (ProductList) -> Unit {
+		return { showListRemovalDecisionDialog(it.id) }
 	}
 
-	private fun showLogoutDecisionDialog() {
+	override fun onAddClick(view: View) {
+		showListCreationDialog()
+	}
+
+	private fun showListCreationDialog() {
 		ListCreationDialog().apply {
 			onAcceptClick = { listName ->
 				viewModel.createList(listName)
 				dismiss()
 			}
 		}.show(childFragmentManager, ListCreationDialog::javaClass.name)
+	}
 
+	private fun showListRemovalDecisionDialog(listId: String) {
+		DecisionDialog().also {
+			it.title = getString(R.string.are_you_sure_you_want_to_delete_this_list_question)
+			it.onButton1Click = {
+				viewModel.deleteList(listId)
+				it.dismiss()
+			}
+			it.onButton2Click = { it.dismiss() }
+		}.show(childFragmentManager, DecisionDialog::javaClass.name)
 	}
 }

@@ -27,4 +27,7 @@ interface ApiRepository {
 	fun createNewList(listName: String?)
 			: Single<Boolean>
 
+	fun deleteList(listId: String)
+			: Single<Boolean>
+
 }

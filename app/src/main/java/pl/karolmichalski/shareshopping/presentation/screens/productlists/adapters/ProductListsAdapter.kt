@@ -11,14 +11,16 @@ import pl.karolmichalski.shareshopping.R
 import pl.karolmichalski.shareshopping.data.models.ProductList
 import pl.karolmichalski.shareshopping.presentation.screens.productlists.viewholders.ProductListViewHolder
 
-@BindingAdapter("productLists", "onItemClick")
-fun RecyclerView.setProductLists(productLists: List<ProductList>, onItemClick: (ProductList) -> Unit) {
+@BindingAdapter("productLists", "onItemClick", "onItemLongClick")
+fun RecyclerView.setProductLists(productLists: List<ProductList>, onItemClick: (ProductList) -> Unit, onItemLongClick: (ProductList) -> Unit) {
 	if (adapter == null)
-		adapter = ProductListsAdapter(onItemClick)
+		adapter = ProductListsAdapter(onItemClick, onItemLongClick)
 	(adapter as ProductListsAdapter).submitList(productLists)
 }
 
-class ProductListsAdapter(private val onItemClick: (ProductList) -> Unit) : ListAdapter<ProductList, ProductListViewHolder>(DIFF_CALLBACK) {
+class ProductListsAdapter(private val onItemClick: (ProductList) -> Unit,
+						  private val onItemLongClick: (ProductList) -> Unit)
+	: ListAdapter<ProductList, ProductListViewHolder>(DIFF_CALLBACK) {
 
 	private companion object {
 		private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ProductList>() {
@@ -33,7 +35,7 @@ class ProductListsAdapter(private val onItemClick: (ProductList) -> Unit) : List
 	}
 
 	override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ProductListViewHolder {
-		return ProductListViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), R.layout.item_productlist, viewGroup, false), onItemClick)
+		return ProductListViewHolder(DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), R.layout.item_productlist, viewGroup, false), onItemClick, onItemLongClick)
 	}
 
 	override fun onBindViewHolder(viewHolder: ProductListViewHolder, i: Int) {

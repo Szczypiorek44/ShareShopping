@@ -57,4 +57,16 @@ class ProductListsViewModel(app: App) : ViewModel() {
 				)
 	}
 
+	fun deleteList(listId: String) {
+		apiRepository.deleteList(listId)
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.doOnSubscribe { isLoading.value = true }
+				.doFinally { isLoading.value = false }
+				.subscribeBy(
+						onSuccess = { getProductLists() },
+						onError = { errorMessage.value = it.localizedMessage }
+				)
+	}
+
 }

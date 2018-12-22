@@ -36,4 +36,8 @@ interface ApiInterface {
 	fun createNewList(@Query("userId") uid: String,
 					  @Query("listName") listName: String)
 			: Single<Boolean>
+
+	@GET("deleteList")
+	fun deleteList(@Query("listId") listId: String)
+			: Single<Boolean>
 }

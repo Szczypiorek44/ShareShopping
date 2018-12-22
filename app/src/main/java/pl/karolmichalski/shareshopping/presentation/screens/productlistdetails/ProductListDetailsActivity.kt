@@ -40,6 +40,7 @@ class ProductListDetailsActivity : AppCompatActivity(), ProductListDetailsListen
 			it.viewModel = viewModel
 			it.listener = this
 		}
+		viewModel.errorMessage.observe(this, showError)
 		viewModel.getProducts(intent.listId)
 	}
 

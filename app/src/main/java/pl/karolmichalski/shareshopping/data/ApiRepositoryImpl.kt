@@ -63,9 +63,22 @@ class ApiRepositoryImpl(private val context: Context,
 	override fun createNewList(listName: String?): Single<Boolean> {
 		val uid = sharedPrefs.getUid()
 		return when {
-			uid.isBlank() -> {Single.error(BlankInputException("Uid is empty"))}
-			listName.isNullOrBlank() -> {Single.error(BlankInputException("List name is empty"))}
+			uid.isBlank() -> {
+				Single.error(BlankInputException("Uid is empty"))
+			}
+			listName.isNullOrBlank() -> {
+				Single.error(BlankInputException("List name is empty"))
+			}
 			else -> apiInterface.createNewList(uid, listName)
+		}
+	}
+
+	override fun deleteList(listId: String): Single<Boolean> {
+		return apiInterface.deleteList(listId).map { result ->
+			if (result)
+				result
+			else
+				error(context.getString(R.string.invalid_login_or_password))
 		}
 	}
 }

@@ -17,6 +17,10 @@
             name="listener"
             type="android.view.View.OnClickListener" />
 
+        <variable
+            name="longClickListener"
+            type="android.view.View.OnLongClickListener" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -29,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{(view) -> listener.onClick(view)}"
+            android:onLongClick="@{(view) -> longClickListener.onLongClick(view)}"
             android:paddingStart="10dp"
             android:paddingTop="5dp"
             android:paddingEnd="10dp"

@@ -20,6 +20,7 @@
     <string name="choose_what_you_want_to_do">Choose what you want to do</string>
     <string name="are_you_sure_you_want_to_log_out_question">Are you sure you want to log out?</string>
     <string name="dont_have_account_yet_question">Don\'t have account yet?</string>
+    <string name="are_you_sure_you_want_to_delete_this_list_question">Are you sure you want to delete this list?</string>
 
     <string name="yes">Yes</string>
     <string name="no">No</string>

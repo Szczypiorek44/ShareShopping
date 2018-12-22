@@ -5,5 +5,6 @@ import pl.karolmichalski.shareshopping.data.models.ProductList
 
 interface ProductListsListener {
 	fun onItemClick(): (ProductList) -> Unit
+	fun onItemLongClick(): (ProductList) -> Unit
 	fun onAddClick(view: View)
 }
