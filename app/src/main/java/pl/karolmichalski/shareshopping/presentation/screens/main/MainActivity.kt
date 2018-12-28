@@ -14,7 +14,7 @@ import pl.karolmichalski.shareshopping.presentation.dialogs.DecisionDialog
 import pl.karolmichalski.shareshopping.presentation.screens.login.LoginActivity
 import pl.karolmichalski.shareshopping.presentation.screens.productlists.ProductListsFragment
 
-class MainActivity : AppCompatActivity(), MainListener {
+class MainActivity : AppCompatActivity() {
 
 	private val viewModel by lazy {
 		ViewModelProviders.of(this, MainViewModel.Factory(application)).get(MainViewModel::class.java)
@@ -25,11 +25,6 @@ class MainActivity : AppCompatActivity(), MainListener {
 		DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main).apply {
 			setLifecycleOwner(this@MainActivity)
 			viewModel = this@MainActivity.viewModel
-			listener = this@MainActivity
-		}
-		supportActionBar?.apply {
-			setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24px)
-			setDisplayHomeAsUpEnabled(true)
 		}
 		showFragment(ProductListsFragment())
 	}
@@ -44,24 +39,7 @@ class MainActivity : AppCompatActivity(), MainListener {
 			showLogoutDecisionDialog()
 			true
 		}
-		android.R.id.home -> {
-			viewModel.drawerOpened.value = viewModel.drawerOpened.value?.not()
-			true
-		}
 		else -> super.onOptionsItemSelected(item)
-	}
-
-	override fun onBackPressed() {
-		if (viewModel.drawerOpened.value == true)
-			viewModel.drawerOpened.value = false
-		else
-			super.onBackPressed()
-	}
-
-	override fun onShoppingListsClick() {
-		viewModel.drawerOpened.value = false
-
-		showFragment(ProductListsFragment())
 	}
 
 	private fun showLogoutDecisionDialog() {

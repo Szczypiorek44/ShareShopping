@@ -1,7 +1,6 @@
 package pl.karolmichalski.shareshopping.presentation.screens.main
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import pl.karolmichalski.shareshopping.data.SharedPrefs
@@ -16,8 +15,6 @@ class MainViewModel(app: App) : ViewModel() {
 			return MainViewModel(application as App) as T
 		}
 	}
-
-	val drawerOpened = MutableLiveData<Boolean>().apply { value = false }
 
 	@Inject
 	lateinit var sharedPrefs: SharedPrefs
