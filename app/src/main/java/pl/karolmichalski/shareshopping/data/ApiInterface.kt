@@ -38,6 +38,7 @@ interface ApiInterface {
 			: Single<Boolean>
 
 	@GET("deleteList")
-	fun deleteList(@Query("listId") listId: String)
+	fun deleteList(@Query("userId") uid: String,
+				   @Query("listId") listId: String)
 			: Single<Boolean>
 }

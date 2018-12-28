@@ -74,7 +74,8 @@ class ApiRepositoryImpl(private val context: Context,
 	}
 
 	override fun deleteList(listId: String): Single<Boolean> {
-		return apiInterface.deleteList(listId).map { result ->
+		val uid = sharedPrefs.getUid()
+		return apiInterface.deleteList(uid, listId).map { result ->
 			if (result)
 				result
 			else
