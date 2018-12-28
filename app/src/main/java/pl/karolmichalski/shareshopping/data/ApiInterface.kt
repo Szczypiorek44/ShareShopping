@@ -41,4 +41,13 @@ interface ApiInterface {
 	fun deleteList(@Query("userId") uid: String,
 				   @Query("listId") listId: String)
 			: Single<Boolean>
+
+	@GET("sync")
+	fun sync(@Query("listId") listId: String)
+			: Single<List<Product>>
+
+	@GET("share")
+	fun share(@Query("userId") uid: String,
+			  @Query("listId") listId: String)
+			: Single<Boolean>
 }

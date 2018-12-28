@@ -82,4 +82,13 @@ class ApiRepositoryImpl(private val context: Context,
 				error(context.getString(R.string.invalid_login_or_password))
 		}
 	}
+
+	override fun sync(listId: String): Single<List<Product>> {
+		return apiInterface.sync(listId)
+	}
+
+	override fun share(listId: String): Single<Boolean> {
+		val uid = sharedPrefs.getUid()
+		return apiInterface.share(uid, listId)
+	}
 }
