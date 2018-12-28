@@ -24,16 +24,6 @@
                 android:onClick="@{()->listener.onShoppingListsClick()}"
                 android:text="@string/shopping_lists" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="2" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="3" />
-
         </LinearLayout>
 
     </com.google.android.material.navigation.NavigationView>
