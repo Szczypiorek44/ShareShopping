@@ -30,8 +30,9 @@ interface ApiRepository {
 	fun deleteList(listId: String)
 			: Single<Boolean>
 
-	fun sync(listId: String)
-			: Single<List<Product>>
+	fun sync(listId: String,
+			 products: List<Product>)
+			: Single<Boolean>
 
 	fun share(listId: String)
 			: Single<Boolean>

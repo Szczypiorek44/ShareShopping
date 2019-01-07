@@ -83,8 +83,8 @@ class ApiRepositoryImpl(private val context: Context,
 		}
 	}
 
-	override fun sync(listId: String): Single<List<Product>> {
-		return apiInterface.sync(listId)
+	override fun sync(listId: String, products: List<Product>): Single<Boolean> {
+		return apiInterface.sync(listId, products)
 	}
 
 	override fun share(listId: String): Single<Boolean> {

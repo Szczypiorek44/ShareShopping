@@ -3,6 +3,7 @@ package pl.karolmichalski.shareshopping.data
 import io.reactivex.Single
 import pl.karolmichalski.shareshopping.data.models.Product
 import pl.karolmichalski.shareshopping.data.models.ProductList
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -43,8 +44,9 @@ interface ApiInterface {
 			: Single<Boolean>
 
 	@GET("sync")
-	fun sync(@Query("listId") listId: String)
-			: Single<List<Product>>
+	fun sync(@Query("listId") listId: String,
+			 @Body products: List<Product>)
+			: Single<Boolean>
 
 	@GET("share")
 	fun share(@Query("userId") uid: String,
