@@ -46,7 +46,7 @@ class ProductListDetailsActivity : AppCompatActivity(), ProductListDetailsListen
 
 	override fun onProductClick(): (Product) -> Unit {
 		return {
-
+			viewModel.invalidateProductSelection(it)
 		}
 	}
 

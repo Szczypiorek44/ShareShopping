@@ -4,19 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 
 
-class Product(@JsonProperty("isBought")
-			  @get:JsonProperty("value")
-			  val isBought: Boolean,
-			  @JsonProperty("ListId")
+class Product(@JsonProperty("ListId")
 			  @get:JsonIgnore
 			  val listId: String,
 			  @JsonProperty("ProductId")
-			  @get:JsonProperty("key")
+			  @get:JsonProperty("Key")
 			  val id: String,
 			  @JsonProperty("ProductName")
 			  @get:JsonIgnore
 			  val name: String) {
 
-	@get:JsonIgnore
-	var isChecked: Boolean = false
+	@set:JsonProperty("isBought")
+	@get:JsonProperty("Value")
+	var isBought: Boolean = false
 }

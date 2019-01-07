@@ -5,6 +5,7 @@ import pl.karolmichalski.shareshopping.data.models.Product
 import pl.karolmichalski.shareshopping.data.models.ProductList
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiInterface {
@@ -43,7 +44,7 @@ interface ApiInterface {
 				   @Query("listId") listId: String)
 			: Single<Boolean>
 
-	@GET("sync")
+	@POST("sync")
 	fun sync(@Query("listId") listId: String,
 			 @Body products: List<Product>)
 			: Single<Boolean>

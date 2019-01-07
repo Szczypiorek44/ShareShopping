@@ -83,8 +83,12 @@ class ApiRepositoryImpl(private val context: Context,
 		}
 	}
 
-	override fun sync(listId: String, products: List<Product>): Single<Boolean> {
-		return apiInterface.sync(listId, products)
+	override fun sync(listId: String, products: List<Product>?): Single<Boolean> {
+		return if (products == null)
+			Single.error(BlankInputException("Product List is null"))
+		else {
+			apiInterface.sync(listId, products)
+		}
 	}
 
 	override fun share(listId: String): Single<Boolean> {

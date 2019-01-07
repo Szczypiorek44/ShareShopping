@@ -17,6 +17,7 @@ class ProductViewHolder(private val binding: ItemProductBinding,
 		binding.product?.apply {
 			onProductClick(this)
 		}
+		binding.invalidateAll()
 	}
 
 	fun bind(product: Product) {

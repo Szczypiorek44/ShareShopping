@@ -31,7 +31,7 @@ interface ApiRepository {
 			: Single<Boolean>
 
 	fun sync(listId: String,
-			 products: List<Product>)
+			 products: List<Product>?)
 			: Single<Boolean>
 
 	fun share(listId: String)

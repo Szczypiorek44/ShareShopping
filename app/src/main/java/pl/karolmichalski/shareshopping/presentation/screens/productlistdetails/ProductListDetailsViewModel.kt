@@ -1,7 +1,6 @@
 package pl.karolmichalski.shareshopping.presentation.screens.productlistdetails
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -56,6 +55,20 @@ class ProductListDetailsViewModel(app: App) : ViewModel() {
 						onError = { errorMessage.value = it.localizedMessage }
 				)
 
+	}
+
+	fun invalidateProductSelection(product: Product) {
+		product.isBought = product.isBought.not()
+		apiRepository.sync(product.listId, productList.value)
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribeBy(
+						onSuccess = {
+							getProducts(product.listId)
+
+						},
+						onError = { errorMessage.value = it.localizedMessage }
+				)
 	}
 
 }
